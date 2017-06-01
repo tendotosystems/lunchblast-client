@@ -1,24 +1,51 @@
 import Expo from 'expo';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux'
+import configureStore from './store'
+import App from './components/App'
+import cacheAssets from './utils/cacheAssets'
 
-class App extends React.Component {
+const store = configureStore()
+
+class AppWithStore extends React.Component {
+  state = {
+    appIsReady: false
+  }
+
+  componentWillMount() {
+    this._loadAssetsAsync()
+  }
+
+  _loadAssetsAsync = async () => {
+    try {
+      await cacheAssets({
+        images: [], 
+        fonts: [
+          {'avenir-next-regular': require('./assets/fonts/avenir-next-regular.ttf')},
+          {'avenir-next-bold': require('./assets/fonts/avenir-next-bold.ttf')}
+        ]
+      });
+    } catch(e) {
+      console.warn(
+        'There was an error caching assets (see: main.js), perhaps due to a ' +
+          'network timeout, so we skipped caching. Reload the app to try again.'
+      )
+    } finally {
+      this.setState({ appIsReady: true });
+    }
+  }
+
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up main.js to start working on your app!</Text>
-      </View>
-    );
+    if(this.state.appIsReady) {
+      return (
+        <Provider store={store}>
+          <App />
+        </Provider>
+      )
+    } else {
+      return <Expo.AppLoading />
+    }
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-Expo.registerRootComponent(App);
+Expo.registerRootComponent(AppWithStore);
