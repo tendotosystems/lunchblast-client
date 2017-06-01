@@ -8,7 +8,6 @@ import cacheAssets from './utils/cacheAssets'
 const store = configureStore()
 
 class AppWithStore extends React.Component {
-  // Move this to redux
   state = {
     appIsReady: false
   }
@@ -19,7 +18,13 @@ class AppWithStore extends React.Component {
 
   _loadAssetsAsync = async () => {
     try {
-      await cacheAssets({});
+      await cacheAssets({
+        images: [], 
+        fonts: [
+          {'avenir-next-regular': require('./assets/fonts/avenir-next-regular.ttf')},
+          {'avenir-next-bold': require('./assets/fonts/avenir-next-bold.ttf')}
+        ]
+      });
     } catch(e) {
       console.warn(
         'There was an error caching assets (see: main.js), perhaps due to a ' +
@@ -31,11 +36,15 @@ class AppWithStore extends React.Component {
   }
 
   render() {
-    return (
-      <Provider store={store}>
-        <App />
-      </Provider>
-    )
+    if(this.state.appIsReady) {
+      return (
+        <Provider store={store}>
+          <App />
+        </Provider>
+      )
+    } else {
+      return <Expo.AppLoading />
+    }
   }
 }
 

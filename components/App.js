@@ -5,7 +5,7 @@ class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up main.js to start working on your app!</Text>
+        <Text style={styles.bodyText}>Open up main.js to start working on your app!</Text>
       </View>
     );
   }
@@ -18,6 +18,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  bodyText: {
+    fontFamily: 'avenir-next-regular'
+  }
 });
 
 export default App
