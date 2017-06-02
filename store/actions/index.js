@@ -1,6 +1,7 @@
 import * as constants from '../constants'
 
 let userUrl = 'https://calm-sands-26146.herokuapp.com/api/v1/user_token'
+let destinationUrl = 'https://calm-sands-26146.herokuapp.com/api/v1/destination/1'
 
 export const beginFetch = () => {
   return {
@@ -56,4 +57,28 @@ export const authorizeUser = (email, password) => {
     }
     dispatch(endFetch())
   }
+}
+
+export const fetchDestination = (token) => {
+  let init = {
+    headers: new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }),
+    method: 'GET',
+  }
+
+  return async (dispatch) => {
+    console.log("Getting Destination")
+    dispatch(beginFetch())
+    try {
+      let response = await fetch(destinationUrl, init);
+      let responseJson = await response.json();
+      console.log(responseJson)
+    } catch(error) {
+      console.log(error);
+    }
+    dispatch(endFetch())
+  }
+
 } 
