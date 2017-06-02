@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#05224B',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    padding: 15
   }
   // bodyText: {
   //   fontFamily: 'avenir-next-regular'
