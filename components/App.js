@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { StyleSheet, Text, View } from 'react-native';
 
 class App extends React.Component {
@@ -23,4 +24,16 @@ const styles = StyleSheet.create({
   }
 });
 
-export default App
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {}
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {}
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

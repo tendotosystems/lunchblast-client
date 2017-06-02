@@ -21,6 +21,13 @@ export const setToken = (token) => {
   }
 }
 
+export const setUser = (user) => {
+  return {
+    type: constants.SET_USER,
+    payload: user
+  }
+}
+
 export const authorizeUser = (email, password) => {
   let init = {
     headers: new Headers({
@@ -42,6 +49,8 @@ export const authorizeUser = (email, password) => {
       let response = await fetch(userUrl, init);
       let responseJson = await response.json();
       console.log(responseJson)
+      dispatch(setToken(responseJson.jwt))
+      dispatch(setUser(responseJson.user))
     } catch(error) {
       console.log(error);
     }
