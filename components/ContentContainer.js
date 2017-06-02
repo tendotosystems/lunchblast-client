@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Button from './Button'
+import Button from './Button';
+import Result from './Result';
 
 class ContentContainer extends React.Component {
   render() {
@@ -9,6 +10,7 @@ class ContentContainer extends React.Component {
         <Button onPress={() => console.log('button click')}>
           Where should we eat?
         </Button>
+        <Result />
       </View>
     )
   }
@@ -16,9 +18,10 @@ class ContentContainer extends React.Component {
 
 const styles = StyleSheet.create({
   contentContainerStyle: {
-    marginTop: 30,
+    marginTop: 40,
     marginLeft: 5,
-    marginRight: 5
+    marginRight: 5,
+    flex: 2
   }
 });
 
