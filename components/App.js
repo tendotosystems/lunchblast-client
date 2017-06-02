@@ -1,12 +1,14 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Logo from './Logo';
+import ContentContainer from './ContentContainer'
 
 class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <Logo source={require('../assets/icons/lunch-blast-logo.png')}/>
+        <ContentContainer />
       </View>
     );
   }
