@@ -1,7 +1,7 @@
 import * as constants from '../constants'
 
 let userUrl = 'https://calm-sands-26146.herokuapp.com/api/v1/user_token'
-let destinationUrl = 'https://calm-sands-26146.herokuapp.com/api/v1/destination/1'
+let destinationUrl = 'https://calm-sands-26146.herokuapp.com/api/v1/destination'
 
 export const beginFetch = () => {
   return {
