@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Logo from './Logo';
 
 class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.bodyText}>Open up main.js to start working on your app!</Text>
+        <Logo source={require('../assets/icons/lunch-blast-logo.png')}/>
       </View>
     );
   }
@@ -14,13 +15,13 @@ class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#05224B',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bodyText: {
-    fontFamily: 'avenir-next-regular'
+    justifyContent: 'center'
   }
+  // bodyText: {
+  //   fontFamily: 'avenir-next-regular'
+  // }
 });
 
-export default App
+export default App;
