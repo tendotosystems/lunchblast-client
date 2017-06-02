@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import configureStore from './store'
 import App from './components/App'
 import cacheAssets from './utils/cacheAssets'
+import { authorizeUser } from './store/actions'
 
 const store = configureStore()
 
@@ -14,6 +15,7 @@ class AppWithStore extends React.Component {
 
   componentWillMount() {
     this._loadAssetsAsync()
+    store.dispatch(authorizeUser("guest@blastapp.io", "password"))
   }
 
   _loadAssetsAsync = async () => {
