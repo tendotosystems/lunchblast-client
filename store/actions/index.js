@@ -29,6 +29,13 @@ export const setUser = (user) => {
   }
 }
 
+export const setDestination = (destination) => {
+  return {
+    type: constants.SET_DESTINATION,
+    payload: destination
+  }
+}
+
 export const authorizeUser = (email, password) => {
   let init = {
     headers: new Headers({
@@ -44,12 +51,10 @@ export const authorizeUser = (email, password) => {
   }
 
   return async (dispatch) => {
-    console.log("Getting User")
     dispatch(beginFetch())
     try {
       let response = await fetch(userUrl, init);
       let responseJson = await response.json();
-      console.log(responseJson)
       dispatch(setToken(responseJson.jwt))
       dispatch(setUser(responseJson.user))
     } catch(error) {
@@ -69,12 +74,11 @@ export const fetchDestination = (token) => {
   }
 
   return async (dispatch) => {
-    console.log("Getting Destination")
     dispatch(beginFetch())
     try {
       let response = await fetch(destinationUrl, init);
       let responseJson = await response.json();
-      console.log(responseJson)
+      dispatch(setDestination(responseJson))
     } catch(error) {
       console.log(error);
     }
