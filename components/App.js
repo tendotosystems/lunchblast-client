@@ -1,11 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { fetchDestination } from '../store/actions'
+import { authorizeUser, fetchDestination } from '../store/actions'
 import Loading from './Loading'
 import AppContent from './AppContent'
 
 class App extends React.Component {
+  componentWillMount() {
+    this.props.authorizeUser("guest@blastapp.io", "password")
+  }
+  
   render() {
     const { token, fetchDestination, isLoading } = this.props
 
@@ -40,7 +44,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchDestination: (token) => dispatch(fetchDestination(token))
+    fetchDestination: (token) => dispatch(fetchDestination(token)),
+    authorizeUser: (email, password) => dispatch(authorizeUser(email, password))
   }
 }
 
