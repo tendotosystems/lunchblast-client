@@ -6,7 +6,6 @@ import { persistStore } from 'redux-persist'
 import configureStore from './store'
 import App from './components/App'
 import cacheAssets from './utils/cacheAssets'
-import { authorizeUser } from './store/actions'
 
 const store = configureStore()
 persistStore(store, {storage: AsyncStorage})
@@ -18,7 +17,6 @@ class AppWithStore extends React.Component {
 
   componentWillMount() {
     this._loadAssetsAsync()
-    store.dispatch(authorizeUser("guest@blastapp.io", "password"))
   }
 
   _loadAssetsAsync = async () => {
