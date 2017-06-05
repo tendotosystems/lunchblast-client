@@ -1,15 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 
-class Loading extends React.Component {
-  render() {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator animating={true} color={'#fff'} />
-      </View>
-    );
-  }
-}
+const Loading = () => (
+  <View style={styles.loadingContainer}>
+    <ActivityIndicator animating={true} color={'#fff'} />
+  </View>
+)
 
 const styles = StyleSheet.create({
   loadingContainer: {
