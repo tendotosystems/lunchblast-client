@@ -31,6 +31,7 @@ class AppWithStore extends React.Component {
           {'avenir-next-bold': require('./assets/fonts/avenir-next-bold.ttf')}
         ]
       });
+      
     } catch(e) {
       console.warn(
         'There was an error caching assets (see: main.js), perhaps due to a ' +
