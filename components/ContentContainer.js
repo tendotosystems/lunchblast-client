@@ -2,21 +2,24 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Button from './Button';
 import Result from './Result';
+import { connect } from 'react-redux';
 
-class ContentContainer extends React.Component {
+class Content extends React.Component {
   render() {
     return (
       <View style={styles.contentContainerStyle}>
         <Button 
-          onPress={() => console.log('button click')}
+          onPress={this.props.onButtonPress}
           style={styles.buttonStyle}>
             Where should we eat?
         </Button>
-        <Result />
+        <Result destination={this.props.destination}/>
       </View>
     )
   }
 };
+
+
 
 const styles = StyleSheet.create({
   contentContainerStyle: {
@@ -26,5 +29,12 @@ const styles = StyleSheet.create({
     flex: 2
   }
 });
+
+const ContentContainer = connect(
+  state => ({
+    destination: state.destination
+  }),
+  
+)(Content);
 
 export default ContentContainer;

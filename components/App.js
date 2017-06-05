@@ -1,16 +1,25 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Logo from './Logo';
-import ContentContainer from './ContentContainer';
-import Footer from './Footer';
+import { connect } from 'react-redux'
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { authorizeUser, fetchDestination } from '../store/actions'
+import Loading from './Loading'
+import AppContent from './AppContent'
 
 class App extends React.Component {
+  componentWillMount() {
+    this.props.authorizeUser("guest@blastapp.io", "password")
+  }
+  
   render() {
+    const { token, fetchDestination, isLoading } = this.props
+
     return (
       <View style={styles.container}>
-        <Logo source={require('../assets/icons/lunch-blast-logo.png')}/>
-        <ContentContainer />
-        <Footer />
+        { 
+          isLoading ? 
+            <Loading /> : 
+            <AppContent onButtonPress={() => fetchDestination(token)}/> 
+        }
       </View>
     );
   }
@@ -21,8 +30,30 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#05224B',
     alignItems: 'center',
+    justifyContent: 'center',
     padding: 15
   }
 });
 
-export default App;
+
+
+
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    token: state.token,
+    isLoading: state.isLoading
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchDestination: (token) => dispatch(fetchDestination(token)),
+    authorizeUser: (email, password) => dispatch(authorizeUser(email, password))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

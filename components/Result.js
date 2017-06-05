@@ -1,19 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const Result = () => {
-  return (
-    <TouchableOpacity 
-      onPress={() => console.log('You selected Krog')} style={styles.buttonStyle}>
-        <Text style={styles.destinationTitleStyle}>
-          Krog Street Market
-        </Text>
-        <Text style={styles.destinationDistanceStyle}>
-          0.2 miles away
-        </Text>
-    </TouchableOpacity>
-  )
-};
+const Result = ({ destination }) => 
+  <TouchableOpacity 
+    onPress={() => console.log('You selected Krog')} style={styles.buttonStyle}>
+      <Text style={styles.destinationTitleStyle}>
+        {destination.name}
+      </Text>
+      <Text style={styles.destinationDistanceStyle}>
+        {destination.distance_to}
+      </Text>
+  </TouchableOpacity>;
 
 const styles = StyleSheet.create({
   buttonStyle: {
