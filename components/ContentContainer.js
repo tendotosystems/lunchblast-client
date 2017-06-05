@@ -7,8 +7,10 @@ class ContentContainer extends React.Component {
   render() {
     return (
       <View style={styles.contentContainerStyle}>
-        <Button onPress={() => console.log('button click')}>
-          Where should we eat?
+        <Button 
+          onPress={() => console.log('button click')}
+          style={styles.buttonStyle}>
+            Where should we eat?
         </Button>
         <Result />
       </View>

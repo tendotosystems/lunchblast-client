@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import AppStyles from './AppStyles';
 
 const Button = ({ onPress, children }) => {
   
@@ -14,12 +15,16 @@ const Button = ({ onPress, children }) => {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    borderRadius: 10,
+    borderRadius: 5,
     backgroundColor: '#D91C5C',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    elevation: 2
   },
   textStyle: {
-    fontFamily: 'avenir-next-regular',
+    ...AppStyles,
     alignSelf: 'center',
     color: '#fff',
     fontSize: 20,

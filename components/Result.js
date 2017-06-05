@@ -1,31 +1,30 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const Result = () => {
   return (
-    <View style={styles.viewStyle}>
-      <Text style={styles.destinationTitleStyle}>
-        Krog Street Market
-      </Text>
-      <Text style={styles.destinationDistanceStyle}>
-        0.2 miles away
-      </Text>
-    </View>
+    <TouchableOpacity 
+      onPress={() => console.log('You selected Krog')} style={styles.buttonStyle}>
+        <Text style={styles.destinationTitleStyle}>
+          Krog Street Market
+        </Text>
+        <Text style={styles.destinationDistanceStyle}>
+          0.2 miles away
+        </Text>
+    </TouchableOpacity>
   )
 };
 
 const styles = StyleSheet.create({
-  viewStyle: {
+  buttonStyle: {
     backgroundColor: '#fff',
-    borderRadius: 3,
+    borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.5,
     elevation: 2,
-    position: 'relative',
     padding: 20,
     marginTop: 25
   },
