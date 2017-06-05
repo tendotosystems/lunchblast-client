@@ -28,11 +28,15 @@ class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#05224B',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+    padding: 15
+  }
 });
+
+
+
 
 const mapStateToProps = (state) => {
   console.log(state)

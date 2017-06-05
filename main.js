@@ -6,6 +6,7 @@ import { persistStore } from 'redux-persist'
 import configureStore from './store'
 import App from './components/App'
 import cacheAssets from './utils/cacheAssets'
+import Image from 'react-native';
 
 const store = configureStore()
 persistStore(store, {storage: AsyncStorage})
@@ -22,7 +23,9 @@ class AppWithStore extends React.Component {
   _loadAssetsAsync = async () => {
     try {
       await cacheAssets({
-        images: [], 
+        images: [
+          require('./assets/icons/Checkerboard.png')
+        ], 
         fonts: [
           {'avenir-next-regular': require('./assets/fonts/avenir-next-regular.ttf')},
           {'avenir-next-bold': require('./assets/fonts/avenir-next-bold.ttf')}
