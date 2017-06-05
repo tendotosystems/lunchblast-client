@@ -2,14 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { fetchDestination } from '../store/actions'
+import Loading from './Loading'
+import AppContent from './AppContent'
 
 class App extends React.Component {
   render() {
-    const { token, fetchDestination } = this.props
+    const { token, fetchDestination, isLoading } = this.props
+
     return (
       <View style={styles.container}>
-        <Text style={styles.bodyText}>Open up main.js to start working on your app!</Text>
-        <Button onPress={() => fetchDestination(token)} title="Fetch Destination" />
+        { 
+          isLoading ? 
+            <Loading /> : 
+            <AppContent onButtonPress={() => fetchDestination(token)}/> 
+        }
       </View>
     );
   }
@@ -22,15 +28,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  bodyText: {
-    fontFamily: 'avenir-next-regular'
-  }
 });
 
 const mapStateToProps = (state) => {
   console.log(state)
   return {
-    token: state.token
+    token: state.token,
+    isLoading: state.isLoading
   }
 }
 
