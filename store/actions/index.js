@@ -31,6 +31,10 @@ export const setUser = (user) => {
   }
 }
 
+export const login = () => ({ type: constants.LOGGED_IN })
+
+export const logout = () => ({ type: constants.LOGOUT })
+
 export const setDestination = (destination) => {
   return {
     type: constants.SET_DESTINATION,
@@ -53,6 +57,7 @@ export const authorizeUser = (email, password) => {
       let responseJson = await response.json();
       dispatch(setToken(responseJson.jwt))
       dispatch(setUser(responseJson.user))
+      dispatch(login())
     } catch(error) {
       console.log(error);
     }

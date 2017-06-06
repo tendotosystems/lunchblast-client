@@ -15,7 +15,7 @@ class Content extends React.Component {
             Where should we eat?
         </Button>
         { 
-          destination ? 
+          destination.id ? 
           <Result 
             destination={destination}
             onResultPress={onResultPress} /> : null
