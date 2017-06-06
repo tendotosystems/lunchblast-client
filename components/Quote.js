@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
+import fontStyles from '../styles/fonts';
 
 const Quote = ({quote}) => (
   <Text style={styles.quoteStyle}>{quote}</Text>
@@ -7,7 +8,7 @@ const Quote = ({quote}) => (
 
 const styles = StyleSheet.create({
   quoteStyle: {
-    fontFamily: 'avenir-next-regular',
+    ...fontStyles,
     color: '#fff',
     fontSize: 14
   }

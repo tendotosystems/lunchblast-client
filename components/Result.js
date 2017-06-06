@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import AppStyles from './AppStyles';
+import fontStyles from '../styles/fonts';
 
 const Result = ({ destination, onResultPress }) => (
   <TouchableOpacity 
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     marginTop: 25
   },
   destinationTitleStyle: {
-    ...AppStyles,
+    ...fontStyles,
     fontSize: 20,
     fontWeight: '400'
   },

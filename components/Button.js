@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
-import AppStyles from './AppStyles';
+import fontStyles from '../styles/fonts';
 
 const Button = ({ onPress, children }) => (
   <TouchableOpacity onPress={onPress} style={styles.buttonStyle}>
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   textStyle: {
-    ...AppStyles,
+    ...fontStyles,
     alignSelf: 'center',
     color: '#fff',
     fontSize: 20,
