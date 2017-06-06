@@ -64,26 +64,15 @@ export const fetchDestination = (token) => {
   return async (dispatch) => {
     dispatch(beginFetch())
     try {
-      let response = await requestDestination(token);
-      let responseJson = await response.json();
+      let response = await requestDestination(token)
+      let responseJson = await response.json()
+      let quoteResponse = await requestQuote()
+      let quoteJson = await quoteResponse.json()
       dispatch(setDestination(responseJson))
+      dispatch(setQuote(quoteJson))
     } catch(error) {
       console.log(error);
     }
     dispatch(endFetch())
   }
 } 
-
-export const fetchQuote = () => {
-  return async (dispatch) => {
-    dispatch(beginFetch())
-    try {
-      let response = await requestQuote();
-      let responseJson = await response.json();
-      dispatch(setQuote(responseJson))
-    } catch(error) {
-      console.log(error);
-    }
-    dispatch(endFetch())
-  }
-}

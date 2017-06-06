@@ -12,7 +12,7 @@ class App extends React.Component {
   }
   
   render() {
-    const { token, fetchDestination, isLoading } = this.props
+    const { token, fetchDestination, isLoading, quote } = this.props
 
     return (
       <View style={styles.container}>
@@ -21,7 +21,7 @@ class App extends React.Component {
         <Logo />
         <ActivityIndicator animating={isLoading} style={styles.loadingIndicator} />
         <ContentContainer onButtonPress={() => fetchDestination(token)} />
-        <Footer /> 
+        <Footer quote={quote} /> 
       </View>
     );
   }
@@ -41,14 +41,12 @@ const styles = StyleSheet.create({
   }
 });
 
-
-
-
 const mapStateToProps = (state) => {
   console.log(state)
   return {
     token: state.token,
-    isLoading: state.isLoading
+    isLoading: state.isLoading,
+    quote: state.quote
   }
 }
 
