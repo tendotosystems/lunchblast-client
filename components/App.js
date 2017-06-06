@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, StatusBar } from 'react-native';
 import { authorizeUser, fetchDestination } from '../store/actions'
-import Loading from './Loading'
-import AppContent from './AppContent'
+import Logo from './Logo'
+import Footer from './Footer'
+import ContentContainer from './ContentContainer'
 
 class App extends React.Component {
   componentWillMount() {
@@ -15,11 +16,12 @@ class App extends React.Component {
 
     return (
       <View style={styles.container}>
-        { 
-          isLoading ? 
-            <Loading /> : 
-            <AppContent onButtonPress={() => fetchDestination(token)}/> 
-        }
+        <StatusBar
+          barStyle="light-content" />
+        <Logo />
+        <ActivityIndicator animating={isLoading} style={styles.loadingIndicator} />
+        <ContentContainer onButtonPress={() => fetchDestination(token)} />
+        <Footer /> 
       </View>
     );
   }
@@ -30,8 +32,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#05224B',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     padding: 15
+  },
+  loadingIndicator: {
+    marginTop: 15,
+    marginBottom: 10
   }
 });
 

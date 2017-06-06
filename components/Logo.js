@@ -1,14 +1,11 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
-const Logo = ({ source }) => {
-  return (
-    <Image
-      style={styles.imageStyle}
-      source={source}
-    />
-  )
-};
+const Logo = () => (
+  <Image
+    style={styles.imageStyle}
+    source={require('../assets/icons/lunch-blast-logo.png')} />
+)
 
 const styles = StyleSheet.create({
   imageStyle: {

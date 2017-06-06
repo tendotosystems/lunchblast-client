@@ -1,5 +1,9 @@
 import * as constants from '../constants'
-import { requestAuthorizeUser, requestQuote, requestDestination } from '../../utils/api'
+import { 
+  requestAuthorizeUser, 
+  requestQuote, 
+  requestDestination 
+} from '../../utils/api'
 
 export const beginFetch = () => {
   return {
