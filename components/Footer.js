@@ -14,12 +14,15 @@ const Footer = ({quote}) => (
 
 const styles = StyleSheet.create({
   viewStyle: {
-    flex: 1
+    flex: 1,
+    alignItems: 'center',
+    marginTop: 5
   },
   imageStyle: {
     resizeMode: 'repeat',
-    height: 20,
-    width: 20
+    height: 100,
+    width: 400,
+    marginTop: 10
   }
 });
 

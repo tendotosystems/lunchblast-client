@@ -10,7 +10,9 @@ const styles = StyleSheet.create({
   quoteStyle: {
     ...fontStyles,
     color: '#fff',
-    fontSize: 14
+    fontSize: 14,
+    paddingLeft: 5,
+    paddingRight: 5
   }
 })
 
