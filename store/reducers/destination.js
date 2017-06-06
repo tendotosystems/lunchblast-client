@@ -7,6 +7,8 @@ export const destination = (state = init, action) => {
   switch(action.type) {
     case constants.SET_DESTINATION:
       return Object.assign({}, init, action.payload)
+    case constants.LOGOUT:
+      return init
     default:
       return state
   }

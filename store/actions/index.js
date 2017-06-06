@@ -33,6 +33,8 @@ export const setUser = (user) => {
 
 export const login = () => ({ type: constants.LOGGED_IN })
 
+export const logout = () => ({ type: constants.LOGOUT })
+
 export const setDestination = (destination) => {
   return {
     type: constants.SET_DESTINATION,
