@@ -14,9 +14,12 @@ class Content extends React.Component {
           style={styles.buttonStyle}>
             Where should we eat?
         </Button>
-        <Result 
-          destination={destination}
-          onResultPress={onResultPress} />
+        { 
+          destination ? 
+          <Result 
+            destination={destination}
+            onResultPress={onResultPress} /> : null
+        }
       </View>
     )
   }
