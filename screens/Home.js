@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View, ActivityIndicator, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, StatusBar, Button } from 'react-native';
 import { authorizeUser, fetchDestination } from '../store/actions'
 import Logo from '../components/Logo'
 import Footer from '../components/Footer'
@@ -9,7 +9,7 @@ import Content from '../components/Content'
 class Home extends React.Component {  
   render() {
     const { token, fetchDestination, isLoading, quote, destination } = this.props
-
+    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <StatusBar
@@ -20,6 +20,7 @@ class Home extends React.Component {
           onButtonPress={() => fetchDestination(token)}
           onResultPress={() => console.log("Krog")}
           destination={destination} />
+        <Button onPress={() => navigate('Settings')} title="Settings" />
         <Footer quote={quote} /> 
       </View>
     );
