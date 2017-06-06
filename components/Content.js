@@ -6,20 +6,21 @@ import { connect } from 'react-redux';
 
 class Content extends React.Component {
   render() {
+    const { onButtonPress, onResultPress, destination } = this.props
     return (
       <View style={styles.contentContainerStyle}>
         <Button 
-          onPress={this.props.onButtonPress}
+          onPress={onButtonPress}
           style={styles.buttonStyle}>
             Where should we eat?
         </Button>
-        <Result destination={this.props.destination}/>
+        <Result 
+          destination={destination}
+          onResultPress={onResultPress} />
       </View>
     )
   }
 };
-
-
 
 const styles = StyleSheet.create({
   contentContainerStyle: {
@@ -30,11 +31,4 @@ const styles = StyleSheet.create({
   }
 });
 
-const ContentContainer = connect(
-  state => ({
-    destination: state.destination
-  }),
-  
-)(Content);
-
-export default ContentContainer;
+export default Content

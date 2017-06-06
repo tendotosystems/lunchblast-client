@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, ActivityIndicator, StatusBar } from 'react-nati
 import { authorizeUser, fetchDestination } from '../store/actions'
 import Logo from './Logo'
 import Footer from './Footer'
-import ContentContainer from './ContentContainer'
+import Content from './Content'
 
 class App extends React.Component {
   componentWillMount() {
@@ -12,7 +12,7 @@ class App extends React.Component {
   }
   
   render() {
-    const { token, fetchDestination, isLoading, quote } = this.props
+    const { token, fetchDestination, isLoading, quote, destination } = this.props
 
     return (
       <View style={styles.container}>
@@ -20,7 +20,10 @@ class App extends React.Component {
           barStyle="light-content" />
         <Logo />
         <ActivityIndicator animating={isLoading} style={styles.loadingIndicator} />
-        <ContentContainer onButtonPress={() => fetchDestination(token)} />
+        <Content 
+          onButtonPress={() => fetchDestination(token)}
+          onResultPress={() => console.log("Krog")}
+          destination={destination} />
         <Footer quote={quote} /> 
       </View>
     );
@@ -46,7 +49,8 @@ const mapStateToProps = (state) => {
   return {
     token: state.token,
     isLoading: state.isLoading,
-    quote: state.quote
+    quote: state.quote,
+    destination: state.destination
   }
 }
 

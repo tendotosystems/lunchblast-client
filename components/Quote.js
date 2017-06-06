@@ -1,8 +1,9 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 
-const Quote = ({quote}) => 
+const Quote = ({quote}) => (
   <Text style={styles.quoteStyle}>{quote}</Text>
+)
 
 const styles = StyleSheet.create({
   quoteStyle: {
