@@ -8,8 +8,7 @@ const configureStore = (initialState) => {
     rootReducer,
     initialState,
     compose(
-      applyMiddleware(thunkMiddleware),
-      autoRehydrate()
+      applyMiddleware(thunkMiddleware)
     ) 
   )
 }
