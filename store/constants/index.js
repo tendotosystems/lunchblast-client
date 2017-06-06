@@ -5,6 +5,8 @@ export const SET_TOKEN = 'SET_TOKEN'
 
 export const SET_USER = 'SET_USER'
 
+export const SET_QUOTE = 'SET_QUOTE'
+
 export const SET_DESTINATION = 'SET_DESTINATION'
 export const SELECT_DESTINATION = 'SELECT_DESTINATION'
 

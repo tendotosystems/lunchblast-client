@@ -1,16 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import fontStyles from '../styles/fonts';
 
-const Result = ({ destination }) => 
+const Result = ({ destination, onResultPress }) => (
   <TouchableOpacity 
-    onPress={() => console.log('You selected Krog')} style={styles.buttonStyle}>
+    onPress={onResultPress} style={styles.buttonStyle}>
       <Text style={styles.destinationTitleStyle}>
         {destination.name}
       </Text>
       <Text style={styles.destinationDistanceStyle}>
         {destination.distance_to}
       </Text>
-  </TouchableOpacity>;
+  </TouchableOpacity>
+)
 
 const styles = StyleSheet.create({
   buttonStyle: {
@@ -26,7 +28,7 @@ const styles = StyleSheet.create({
     marginTop: 25
   },
   destinationTitleStyle: {
-    fontFamily: 'avenir-next-regular',
+    ...fontStyles,
     fontSize: 20,
     fontWeight: '400'
   },

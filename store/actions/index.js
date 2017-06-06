@@ -1,7 +1,9 @@
 import * as constants from '../constants'
-
-let userUrl = 'https://calm-sands-26146.herokuapp.com/api/v1/user_token'
-let destinationUrl = 'https://calm-sands-26146.herokuapp.com/api/v1/destination'
+import { 
+  requestAuthorizeUser, 
+  requestQuote, 
+  requestDestination 
+} from '../../utils/api'
 
 export const beginFetch = () => {
   return {
@@ -36,24 +38,18 @@ export const setDestination = (destination) => {
   }
 }
 
-export const authorizeUser = (email, password) => {
-  let init = {
-    headers: new Headers({
-      'Content-Type': 'application/json'
-    }),
-    method: 'POST',
-    body: JSON.stringify({
-      auth: { 
-        email, 
-        password 
-      }
-    })
+export const setQuote = (quote) => {
+  return {
+    type: constants.SET_QUOTE,
+    payload: quote
   }
+}
 
+export const authorizeUser = (email, password) => {
   return async (dispatch) => {
     dispatch(beginFetch())
     try {
-      let response = await fetch(userUrl, init);
+      let response = await requestAuthorizeUser(email, password);
       let responseJson = await response.json();
       dispatch(setToken(responseJson.jwt))
       dispatch(setUser(responseJson.user))
@@ -65,24 +61,18 @@ export const authorizeUser = (email, password) => {
 }
 
 export const fetchDestination = (token) => {
-  let init = {
-    headers: new Headers({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }),
-    method: 'GET',
-  }
-
   return async (dispatch) => {
     dispatch(beginFetch())
     try {
-      let response = await fetch(destinationUrl, init);
-      let responseJson = await response.json();
+      let response = await requestDestination(token)
+      let responseJson = await response.json()
+      let quoteResponse = await requestQuote()
+      let quoteJson = await quoteResponse.json()
       dispatch(setDestination(responseJson))
+      dispatch(setQuote(quoteJson))
     } catch(error) {
       console.log(error);
     }
     dispatch(endFetch())
   }
-
 } 

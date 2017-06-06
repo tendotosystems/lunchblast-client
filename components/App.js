@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, StatusBar } from 'react-native';
 import { authorizeUser, fetchDestination } from '../store/actions'
-import Loading from './Loading'
-import AppContent from './AppContent'
+import Logo from './Logo'
+import Footer from './Footer'
+import Content from './Content'
 
 class App extends React.Component {
   componentWillMount() {
@@ -11,15 +12,19 @@ class App extends React.Component {
   }
   
   render() {
-    const { token, fetchDestination, isLoading } = this.props
+    const { token, fetchDestination, isLoading, quote, destination } = this.props
 
     return (
       <View style={styles.container}>
-        { 
-          isLoading ? 
-            <Loading /> : 
-            <AppContent onButtonPress={() => fetchDestination(token)}/> 
-        }
+        <StatusBar
+          barStyle="light-content" />
+        <Logo />
+        <ActivityIndicator animating={isLoading} style={styles.loadingIndicator} />
+        <Content 
+          onButtonPress={() => fetchDestination(token)}
+          onResultPress={() => console.log("Krog")}
+          destination={destination} />
+        <Footer quote={quote} /> 
       </View>
     );
   }
@@ -30,19 +35,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#05224B',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     padding: 15
+  },
+  loadingIndicator: {
+    marginTop: 15,
+    marginBottom: 10
   }
 });
-
-
-
 
 const mapStateToProps = (state) => {
   console.log(state)
   return {
     token: state.token,
-    isLoading: state.isLoading
+    isLoading: state.isLoading,
+    quote: state.quote,
+    destination: state.destination
   }
 }
 
