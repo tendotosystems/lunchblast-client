@@ -36,10 +36,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#05224B',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    padding: 15
+    paddingTop: 15
   },
   loadingIndicator: {
-    marginTop: 15,
+    marginTop: 10,
     marginBottom: 10
   }
 });

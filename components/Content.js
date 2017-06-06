@@ -28,8 +28,6 @@ class Content extends React.Component {
 const styles = StyleSheet.create({
   contentContainerStyle: {
     marginTop: 10,
-    marginLeft: 5,
-    marginRight: 5,
     flex: 2
   }
 });
