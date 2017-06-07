@@ -1,6 +1,7 @@
 import * as constants from '../constants'
 import { 
-  requestAuthorizeUser, 
+  requestAuthorizeUser,
+  requestSignupUser, 
   requestQuote, 
   requestDestination 
 } from '../../utils/api'
@@ -54,12 +55,36 @@ export const authorizeUser = (email, password) => {
     dispatch(beginFetch())
     try {
       let response = await requestAuthorizeUser(email, password);
-      let responseJson = await response.json();
-      dispatch(setToken(responseJson.jwt))
-      dispatch(setUser(responseJson.user))
-      dispatch(login())
-    } catch(error) {
-      console.log(error);
+      let responseJson = await response.json()
+      if(!response.ok) {
+        throw new Error()
+      } else {
+        dispatch(setToken(responseJson.jwt))
+        dispatch(setUser(responseJson.user))
+        dispatch(login())
+      }
+    } catch(e) {
+      console.log("You could not be logged in.");
+    }
+    dispatch(endFetch())
+  }
+}
+
+export const signupUser = (userInputs) => {
+  return async (dispatch) => {
+    dispatch(beginFetch())
+    try {
+      let response = await requestSignupUser(userInputs)
+      let responseJson = await response.json()
+      if (!response.ok) {
+        throw new Error();
+      } else {
+        dispatch(setToken(responseJson.jwt))
+        dispatch(setUser(responseJson.user))
+        dispatch(login())
+      }
+    } catch(e) {
+      console.log('There was an error logging you in.  Please make sure your password and password confirmation match')
     }
     dispatch(endFetch())
   }
@@ -73,10 +98,15 @@ export const fetchDestination = (token) => {
       let responseJson = await response.json()
       let quoteResponse = await requestQuote()
       let quoteJson = await quoteResponse.json()
-      dispatch(setDestination(responseJson))
-      dispatch(setQuote(quoteJson))
+
+      if(!response.ok || !quoteResponse.ok) {
+        throw new Error()
+      } else {
+        dispatch(setDestination(responseJson))
+        dispatch(setQuote(quoteJson))
+      }
     } catch(error) {
-      console.log(error);
+      console.log("Couldn't make it to Flavortown.");
     }
     dispatch(endFetch())
   }

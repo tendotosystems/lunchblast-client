@@ -15,6 +15,7 @@ class Login extends Component {
   
   render() {
     const { authorizeUser } = this.props
+    const { navigate } = this.props.navigation
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
@@ -38,6 +39,9 @@ class Login extends Component {
             <Button onPress={() => authorizeUser(this.state.email,
                                                  this.state.password)}>
                 Log Me In!
+            </Button>
+            <Button onPress={() => navigate('Signup')}>
+              Sign Me Up!
             </Button>
           </View>
           <Footer />
