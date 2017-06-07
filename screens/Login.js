@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import { View, StyleSheet, TouchableWithoutFeedback, TextInput, Keyboard } from 'react-native'
 import { connect } from 'react-redux'
 import { authorizeUser } from '../store/actions'
 import Button from '../components/Button'
-import Input from '../components/Input'
 import Logo from '../components/Logo'
 import Footer from '../components/Footer'
 
@@ -16,25 +15,33 @@ class Login extends Component {
   
   render() {
     const { authorizeUser } = this.props
+    const { navigate } = this.props.navigation
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Logo />
           <View style={styles.formStyle}>
-            <Input
+            <TextInput
               style={styles.inputStyle}
               placeholder="Email"
               value={this.state.email}
-              onChangeText={email => this.setState({ email })} />
-            <Input
+              onChangeText={email => this.setState({ email })}
+              autoCorrect={false}
+              autoCapitalize="none" />
+            <TextInput
               style={styles.inputStyle}
               secureTextEntry={true}
               placeholder="Password"
               value={this.state.password}
-              onChangeText={password => this.setState({ password })} />
+              onChangeText={password => this.setState({ password })} 
+              autoCorrect={false}
+              autoCapitalize="none" />
             <Button onPress={() => authorizeUser(this.state.email,
                                                  this.state.password)}>
                 Log Me In!
+            </Button>
+            <Button onPress={() => navigate('Signup')}>
+              Sign Me Up!
             </Button>
           </View>
           <Footer />
