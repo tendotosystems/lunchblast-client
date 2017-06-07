@@ -1,4 +1,5 @@
 let userUrl = 'https://calm-sands-26146.herokuapp.com/api/v1/user_token'
+let userSignupUrl = 'https://calm-sands-26146.herokuapp.com/api/v1/user'
 let destinationUrl = 'https://calm-sands-26146.herokuapp.com/api/v1/destination'
 let quoteUrl = 'https://4ozc0qiiec.execute-api.us-east-1.amazonaws.com/prod/quote'
 
@@ -17,6 +18,18 @@ export const requestAuthorizeUser = (email, password) => {
   }
 
   return fetch(userUrl, init)
+}
+
+export const requestSignupUser = (userInputs) => {
+  let init = {
+    headers: new Headers({
+      'Content-Type': 'application/json'
+    }),
+    method: 'POST',
+    body: JSON.stringify(userInputs)
+  }
+
+  return fetch(userSignupUrl, init)
 }
 
 export const requestDestination = (token) => {

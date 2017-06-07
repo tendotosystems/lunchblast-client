@@ -7,6 +7,7 @@ import Input from '../components/Input'
 import Logo from '../components/Logo'
 import Footer from '../components/Footer'
 
+
 class Login extends Component {
   state = { 
     email: '',
