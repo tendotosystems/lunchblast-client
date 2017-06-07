@@ -4,14 +4,23 @@ import { connect } from 'react-redux'
 import { authorizeUser } from '../store/actions'
 import Button from '../components/Button'
 
-const Login = ({authorizeUser}) => (
-  <View style={styles.container}>
-    <Text style={styles.loginText}>Login Screen</Text>
-    <Button onPress={() => authorizeUser("guest@blastapp.io", "password")}>
-      Log Me In!
-    </Button>
-  </View>
-)
+class Login extends React.Component {
+  render() {
+    const { authorizeUser } = this.props
+    const { navigate } = this.props.navigation
+    return (
+      <View style={styles.container}>
+        <Text style={styles.loginText}>Login Screen</Text>
+        <Button onPress={() => authorizeUser("guest@blastapp.io", "password")}>
+          Log Me In!
+        </Button>
+        <Button onPress={() => navigate('Signup')}>
+          Sign Me Up!
+        </Button>
+      </View>
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
