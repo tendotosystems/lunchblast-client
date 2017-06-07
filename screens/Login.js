@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { connect } from 'react-redux'
 import { authorizeUser } from '../store/actions'
 import Button from '../components/Button'
@@ -16,27 +16,29 @@ class Login extends Component {
   render() {
     const { authorizeUser } = this.props
     return (
-      <View style={styles.container}>
-        <Logo />
-        <View style={styles.formStyle}>
-          <Input
-            style={styles.inputStyle}
-            placeholder="Email"
-            value={this.state.email}
-            onChangeText={email => this.setState({ email })} />
-          <Input
-            style={styles.inputStyle}
-            secureTextEntry={true}
-            placeholder="Password"
-            value={this.state.password}
-            onChangeText={password => this.setState({ password })} />
-          <Button onPress={() => authorizeUser(this.state.email,
-                                               this.state.password)}>
-              Log Me In!
-          </Button>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <Logo />
+          <View style={styles.formStyle}>
+            <Input
+              style={styles.inputStyle}
+              placeholder="Email"
+              value={this.state.email}
+              onChangeText={email => this.setState({ email })} />
+            <Input
+              style={styles.inputStyle}
+              secureTextEntry={true}
+              placeholder="Password"
+              value={this.state.password}
+              onChangeText={password => this.setState({ password })} />
+            <Button onPress={() => authorizeUser(this.state.email,
+                                                 this.state.password)}>
+                Log Me In!
+            </Button>
+          </View>
+          <Footer />
         </View>
-        <Footer />
-      </View>
+      </TouchableWithoutFeedback>
     )
   }
 }
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     height: 40,
     width: 200,
-    marginBottom: 15
+    marginBottom: 25
   },
   formStyle: {
     flex: 2,
