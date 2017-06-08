@@ -2,10 +2,13 @@ import React from 'react'
 import { View, Text, Button, StyleSheet } from 'react-native'
 
 const ErrorMessage = ({message, onClose}) => (
-  <View style={styles.container}>
-    <Text>{message}</Text>
-    <Button title="X" onPress={onClose} />
-  </View>
+  message !== '' ? (
+    <View style={styles.container}>
+      <Text>{message}</Text>
+      <Button title="X" onPress={onClose} />
+    </View>
+  ) :
+  null
 )
 
 const styles = StyleSheet.create({
@@ -16,4 +19,5 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 })
+
 export default ErrorMessage

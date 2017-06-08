@@ -21,7 +21,7 @@ class Login extends Component {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Logo />
-          { error !== '' ? <ErrorMessage message={error} onClose={clearError} /> : null }
+          <ErrorMessage message={error} onClose={clearError} />
           <View style={styles.formStyle}>
             <TextInput
               style={styles.inputStyle}

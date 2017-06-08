@@ -18,7 +18,7 @@ class Signup extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.signupText}>Signup Screen</Text>
-        { error !== '' ? <ErrorMessage message={error} onClose={clearError} /> : null }
+        <ErrorMessage message={error} onClose={clearError} />
         <View style={styles.formStyle}>
           <TextInput
             style={styles.inputStyle}
