@@ -28,25 +28,27 @@ class Login extends Component {
         <View style={container}>
           <StatusBar
             barStyle="light-content" />
-          <Logo />
-          <ErrorMessage message={error} onClose={clearError} />
-          <ActivityIndicator animating={isLoading} style={styles.loadingStyle}/>
-          <KeyboardAvoidingView behavior="padding">
-            <TextInput
-              style={inputStyle}
-              placeholder="Email"
-              value={this.state.email}
-              onChangeText={email => this.setState({ email })}
-              autoCorrect={false}
-              autoCapitalize="none" />
-            <TextInput
-              style={inputStyle}
-              secureTextEntry={true}
-              placeholder="Password"
-              value={this.state.password}
-              onChangeText={password => this.setState({ password })} 
-              autoCorrect={false}
-              autoCapitalize="none" />
+          <KeyboardAvoidingView behavior="position" contentContainerStyle={styles.contentContainer}>
+            <Logo />
+            <ErrorMessage message={error} onClose={clearError} />
+            <ActivityIndicator animating={isLoading} style={styles.loadingStyle}/>
+            <View style={{marginVertical: 10, width: '100%'}}>
+              <TextInput
+                style={inputStyle}
+                placeholder="Email"
+                value={this.state.email}
+                onChangeText={email => this.setState({ email })}
+                autoCorrect={false}
+                autoCapitalize="none" />
+              <TextInput
+                style={inputStyle}
+                secureTextEntry={true}
+                placeholder="Password"
+                value={this.state.password}
+                onChangeText={password => this.setState({ password })} 
+                autoCorrect={false}
+                autoCapitalize="none" />
+            </View>
             <FancyButton onPress={() => authorizeUser(this.state.email,
                                                       this.state.password)}>
                 Log In
@@ -55,7 +57,7 @@ class Login extends Component {
                title="Sign Up"
                onPress={() => navigate('Signup')}
                color="#ffffff" />
-           </KeyboardAvoidingView>
+          </KeyboardAvoidingView>
           <Footer />
         </View>
       </TouchableWithoutFeedback>
@@ -69,8 +71,15 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#05224B',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     paddingTop: 15
+  },
+  contentContainer: {
+    marginTop: 50,
+    height: 500,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start' 
   },
   inputStyle: {
     ...fontStyles,
@@ -81,7 +90,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 23,
     height: 40,
-    width: 200,
     marginBottom: 10
   },
   loadingStyle: {
