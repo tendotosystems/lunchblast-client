@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableWithoutFeedback, TextInput, Keyboard } from 'react-native'
+import { View, StyleSheet, TouchableWithoutFeedback, TextInput, Keyboard, Button } from 'react-native'
 import { connect } from 'react-redux'
-<<<<<<< HEAD
-import { authorizeUser } from '../store/actions'
-import FancyButton from '../components/FancyButton'
-=======
 import { authorizeUser, clearError } from '../store/actions'
-import Button from '../components/Button'
->>>>>>> origin
+import FancyButton from '../components/FancyButton'
 import Logo from '../components/Logo'
 import Footer from '../components/Footer'
 import ErrorMessage from '../components/ErrorMessage'
-
+import fontStyles from '../styles/fonts'
 
 class Login extends Component {
   state = { 
@@ -27,7 +22,6 @@ class Login extends Component {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={container}>
           <Logo />
-
           { error !== '' ? <ErrorMessage message={error} onClose={clearError} /> : null }
           <View style={styles.formStyle}>
             <TextInput
@@ -49,9 +43,10 @@ class Login extends Component {
                                                       this.state.password)}>
                 Log Me In!
             </FancyButton>
-            <FancyButton onPress={() => navigate('Signup')}>
-              Sign Me Up!
-            </FancyButton>
+            <Button
+               title="Sign Me Up"
+               onPress={() => navigate('Signup')}
+               color="#ffffff" />
           </View>
           <Footer />
         </View>
@@ -65,10 +60,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#05224B',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     paddingTop: 15
   },
   inputStyle: {
+    ...fontStyles,
+    borderRadius: 3,
     backgroundColor: '#fff',
     color: '#000',
     padding: 5,

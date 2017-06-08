@@ -3,13 +3,10 @@ import { View, Text, Button, StyleSheet, TextInput } from 'react-native'
 import { connect } from 'react-redux'
 import { authorizeUser, signupUser, clearError } from '../store/actions'
 import { NavigationActions } from 'react-navigation'
-<<<<<<< HEAD
 import Logo from '../components/Logo'
-import Footer from '../components/Footer'
 import FancyButton from '../components/FancyButton'
-=======
 import ErrorMessage from '../components/ErrorMessage'
->>>>>>> origin
+import fontStyles from '../styles/fonts'
 
 class Signup extends Component {
   state = {
@@ -23,8 +20,8 @@ class Signup extends Component {
     const { navigate } = this.props.navigation
     const { container, formStyle, inputStyle } = styles
     return (
-
       <View style={styles.container}>
+        <Logo />
         { error !== '' ? <ErrorMessage message={error} onClose={clearError} /> : null }
         <View style={styles.formStyle}>
           <TextInput
@@ -56,11 +53,9 @@ class Signup extends Component {
           <Button 
             title="Back"
             onPress={() => 
-              this.props.navigation.dispatch(NavigationActions.back())} 
-            style={styles.backButtonStyle}
+              this.props.navigation.dispatch(NavigationActions.back())}
             color="#ffffff"/>
         </View>
-        <Footer />
       </View>
     )
   }
@@ -71,10 +66,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#05224B',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     paddingTop: 15
   },
   inputStyle: {
+    ...fontStyles,
+    borderRadius: 3,
     backgroundColor: '#fff',
     color: '#000',
     padding: 5,
