@@ -22,7 +22,10 @@ class Home extends React.Component {
           onButtonPress={() => fetchDestination(token)}
           onResultPress={() => console.log("Krog")}
           destination={destination} />
-        <Button onPress={() => navigate('Settings')} title="Settings" />
+        <Button 
+          onPress={() => navigate('Settings')}
+          title="Settings"
+          color="#fff" />
         <Footer quote={quote} /> 
       </View>
     );
