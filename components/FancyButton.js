@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import fontStyles from '../styles/fonts';
 
-const Button = ({ onPress, children }) => (
+const FancyButton = ({ onPress, children }) => (
   <TouchableOpacity onPress={onPress} style={styles.buttonStyle}>
     <Text style={styles.textStyle}>
       {children}
@@ -16,10 +16,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#D91C5C',
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    elevation: 2
+    marginBottom: 10
   },
   textStyle: {
     ...fontStyles,
@@ -31,4 +28,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Button;
+export default FancyButton;

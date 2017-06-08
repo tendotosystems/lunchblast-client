@@ -3,7 +3,10 @@ import { View, Text, Button, StyleSheet, TextInput, ActivityIndicator } from 're
 import { connect } from 'react-redux'
 import { authorizeUser, signupUser, clearError } from '../store/actions'
 import { NavigationActions } from 'react-navigation'
+import Logo from '../components/Logo'
+import FancyButton from '../components/FancyButton'
 import ErrorMessage from '../components/ErrorMessage'
+import fontStyles from '../styles/fonts'
 
 class Signup extends React.Component {
   state = {
@@ -15,21 +18,22 @@ class Signup extends React.Component {
   render() {
     const { signupUser, error, clearError, isLoading } = this.props
     const { navigate } = this.props.navigation
+    const { container, formStyle, inputStyle } = styles
     return (
       <View style={styles.container}>
-        <Text style={styles.signupText}>Signup Screen</Text>
+        <Logo />
         <ActivityIndicator animating={isLoading} />
         <ErrorMessage message={error} onClose={clearError} />
         <View style={styles.formStyle}>
           <TextInput
-            style={styles.inputStyle}
+            style={inputStyle}
             placeholder="Email"
             value={this.state.email}
             onChangeText={email => this.setState({ email })}
             autoCorrect={false}
             autoCapitalize="none" />
           <TextInput
-            style={styles.inputStyle}
+            style={inputStyle}
             secureTextEntry={true}
             placeholder="Password"
             value={this.state.password}
@@ -37,16 +41,22 @@ class Signup extends React.Component {
             autoCorrect={false}
             autoCapitalize="none" />
           <TextInput
-            style={styles.inputStyle}
+            style={inputStyle}
             secureTextEntry={true}
-            placeholder="Password Confirmation"
+            placeholder="Confirm Passsword"
             value={this.state.password_confirmation}
             onChangeText={password_confirmation => this.setState({ password_confirmation })} 
             autoCorrect={false}
             autoCapitalize="none" />
-          <Button title="Sign Up!" onPress={() => this.props.signupUser(this.state)} />
+          <FancyButton onPress={() => this.props.signupUser(this.state)} >
+            Sign Up!
+          </FancyButton>
+          <Button 
+            title="Back"
+            onPress={() => 
+              this.props.navigation.dispatch(NavigationActions.back())}
+            color="#ffffff"/>
         </View>
-        <Button title="Back" onPress={() => this.props.navigation.dispatch(NavigationActions.back())} />
       </View>
     )
   }
@@ -57,16 +67,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#05224B',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     paddingTop: 15
   },
-  signupText: {
-    color: '#fff',
-    fontFamily: 'avenir-next-regular',
-    fontSize: 24,
-    marginBottom: 24
-  },
   inputStyle: {
+    ...fontStyles,
+    borderRadius: 3,
     backgroundColor: '#fff',
     color: '#000',
     padding: 5,
@@ -74,12 +80,12 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     height: 40,
     width: 200,
-    marginBottom: 25
+    marginBottom: 10
   },
   formStyle: {
     flex: 2,
-    marginTop: 45,
-    marginBottom: 30
+    marginTop: 35,
+    marginBottom: 20
   }
 });
 

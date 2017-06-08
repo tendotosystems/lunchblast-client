@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Button from './Button';
+import FancyButton from './FancyButton';
 import Result from './Result';
 import { connect } from 'react-redux';
 
@@ -9,11 +9,11 @@ class Content extends React.Component {
     const { onButtonPress, onResultPress, destination } = this.props
     return (
       <View style={styles.contentContainerStyle}>
-        <Button 
+        <FancyButton 
           onPress={onButtonPress}
           style={styles.buttonStyle}>
             Where should we eat?
-        </Button>
+        </FancyButton>
         { 
           destination.id ? 
           <Result 
