@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    marginTop: 25,
+    marginVertical: 25,
     width: 250
   },
   destinationTitleStyle: {
