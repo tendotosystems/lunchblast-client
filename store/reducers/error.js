@@ -6,6 +6,8 @@ export const error = (state = init, action) => {
     case constants.SET_ERROR:
       return action.payload
     case constants.CLEAR_ERROR:
+    case constants.LOGGED_IN:
+    case constants.LOGOUT:
       return init
     default:
       return state
