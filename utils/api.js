@@ -1,7 +1,10 @@
-let userUrl = 'https://calm-sands-26146.herokuapp.com/api/v1/user_token'
-let userSignupUrl = 'https://calm-sands-26146.herokuapp.com/api/v1/user'
-let destinationUrl = 'https://calm-sands-26146.herokuapp.com/api/v1/destination'
+let baseUrl = 'https://calm-sands-26146.herokuapp.com/api/v1'
+
+let userUrl = `${baseUrl}/user_token`
+let userSignupUrl = `${baseUrl}/user`
+let destinationUrl = `${baseUrl}/destination`
 let quoteUrl = 'https://4ozc0qiiec.execute-api.us-east-1.amazonaws.com/prod/quote'
+let selectionUrl = `${baseUrl}/selection`
 
 export const requestAuthorizeUser = (email, password) => {
   let init = {
@@ -42,6 +45,22 @@ export const requestDestination = (token) => {
   }
 
   return fetch(destinationUrl, init)
+}
+
+export const requestSelection = (user, token, destination) => {
+  let init = {
+    headers: new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }),
+    method: 'POST',
+    body: JSON.stringify({
+      destination_id: destination.id,
+      user_id: user.id
+    })
+  }
+
+  return fetch(selectionUrl, init)
 }
 
 export const requestQuote = () => {

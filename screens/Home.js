@@ -9,7 +9,10 @@ import Content from '../components/Content'
 
 class Home extends React.Component {  
   render() {
-    const { token, fetchDestination, isLoading, quote, destination, error, clearError } = this.props
+    const { 
+      token, fetchDestination, isLoading, 
+      quote, destination, error, clearError 
+    } = this.props
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
