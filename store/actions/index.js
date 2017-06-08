@@ -50,6 +50,15 @@ export const setQuote = (quote) => {
   }
 }
 
+export const setError = (error) => {
+  return {
+    type: constants.SET_ERROR,
+    payload: error
+  }
+}
+
+export const clearError = () => ({ type: constants.CLEAR_ERROR })
+
 export const authorizeUser = (email, password) => {
   return async (dispatch) => {
     dispatch(beginFetch())

@@ -4,13 +4,15 @@ import { user } from './user'
 import { auth } from './auth'
 import { destination } from './destination'
 import { quote } from './quote'
+import { error } from './error'
 
 const rootReducer = combineReducers({
   isLoading,
   user,
   auth,
   destination,
-  quote
+  quote,
+  error
 })
 
 export default rootReducer

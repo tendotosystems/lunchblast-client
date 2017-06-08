@@ -14,7 +14,7 @@ class Login extends Component {
   };
   
   render() {
-    const { authorizeUser } = this.props
+    const { authorizeUser, error } = this.props
     const { navigate } = this.props.navigation
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
