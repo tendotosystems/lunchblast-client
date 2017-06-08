@@ -50,6 +50,15 @@ export const setQuote = (quote) => {
   }
 }
 
+export const setError = (error) => {
+  return {
+    type: constants.SET_ERROR,
+    payload: error
+  }
+}
+
+export const clearError = () => ({ type: constants.CLEAR_ERROR })
+
 export const authorizeUser = (email, password) => {
   return async (dispatch) => {
     dispatch(beginFetch())
@@ -65,6 +74,7 @@ export const authorizeUser = (email, password) => {
       }
     } catch(e) {
       console.log("You could not be logged in.");
+      dispatch(setError("You could not be logged in."))
     }
     dispatch(endFetch())
   }
@@ -85,6 +95,7 @@ export const signupUser = (userInputs) => {
       }
     } catch(e) {
       console.log('There was an error logging you in.  Please make sure your password and password confirmation match')
+      dispatch(setError('There was an error logging you in.  Please make sure your password and password confirmation match.'))
     }
     dispatch(endFetch())
   }
@@ -106,7 +117,8 @@ export const fetchDestination = (token) => {
         dispatch(setQuote(quoteJson))
       }
     } catch(error) {
-      console.log("Couldn't make it to Flavortown.");
+      console.log("Couldn't make it to Flavortown.")
+      dispatch(setError("Couldn't make it to Flavortown."))
     }
     dispatch(endFetch())
   }
