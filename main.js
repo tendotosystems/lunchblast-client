@@ -9,7 +9,7 @@ import cacheAssets from './utils/cacheAssets'
 import Image from 'react-native';
 
 const store = configureStore()
-// persistStore(store, {storage: AsyncStorage})
+persistStore(store, {storage: AsyncStorage})
 
 class AppWithStore extends React.Component {
   state = {

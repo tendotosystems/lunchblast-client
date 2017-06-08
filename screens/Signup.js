@@ -1,14 +1,19 @@
-import React, { Component } from 'react'
-import { View, Text, Button, StyleSheet, TextInput } from 'react-native'
+import React from 'react'
+import { 
+  View, Text, Button, TouchableWithoutFeedback,
+  StyleSheet, TextInput, Keyboard,
+  ActivityIndicator, StatusBar 
+} from 'react-native'
 import { connect } from 'react-redux'
 import { authorizeUser, signupUser, clearError } from '../store/actions'
 import { NavigationActions } from 'react-navigation'
 import Logo from '../components/Logo'
 import FancyButton from '../components/FancyButton'
 import ErrorMessage from '../components/ErrorMessage'
+import Footer from '../components/Footer'
 import fontStyles from '../styles/fonts'
 
-class Signup extends Component {
+class Signup extends React.Component {
   state = {
     email: '',
     password: '',
@@ -16,47 +21,53 @@ class Signup extends Component {
   }
 
   render() {
-    const { signupUser, error, clearError } = this.props
+    const { signupUser, error, clearError, isLoading } = this.props
     const { navigate } = this.props.navigation
     const { container, formStyle, inputStyle } = styles
     return (
-      <View style={styles.container}>
-        <Logo />
-        { error !== '' ? <ErrorMessage message={error} onClose={clearError} /> : null }
-        <View style={styles.formStyle}>
-          <TextInput
-            style={inputStyle}
-            placeholder="Email"
-            value={this.state.email}
-            onChangeText={email => this.setState({ email })}
-            autoCorrect={false}
-            autoCapitalize="none" />
-          <TextInput
-            style={inputStyle}
-            secureTextEntry={true}
-            placeholder="Password"
-            value={this.state.password}
-            onChangeText={password => this.setState({ password })} 
-            autoCorrect={false}
-            autoCapitalize="none" />
-          <TextInput
-            style={inputStyle}
-            secureTextEntry={true}
-            placeholder="Confirm Passsword"
-            value={this.state.password_confirmation}
-            onChangeText={password_confirmation => this.setState({ password_confirmation })} 
-            autoCorrect={false}
-            autoCapitalize="none" />
-          <FancyButton onPress={() => this.props.signupUser(this.state)} >
-            Sign Up!
-          </FancyButton>
-          <Button 
-            title="Back"
-            onPress={() => 
-              this.props.navigation.dispatch(NavigationActions.back())}
-            color="#ffffff"/>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+        <View style={styles.container}>
+          <StatusBar
+            barStyle="light-content" />
+          <Logo />
+          <ErrorMessage message={error} onClose={clearError} />
+          <ActivityIndicator animating={isLoading} />
+          <View>
+            <TextInput
+              style={inputStyle}
+              placeholder="Email"
+              value={this.state.email}
+              onChangeText={email => this.setState({ email })}
+              autoCorrect={false}
+              autoCapitalize="none" />
+            <TextInput
+              style={inputStyle}
+              secureTextEntry={true}
+              placeholder="Password"
+              value={this.state.password}
+              onChangeText={password => this.setState({ password })} 
+              autoCorrect={false}
+              autoCapitalize="none" />
+            <TextInput
+              style={inputStyle}
+              secureTextEntry={true}
+              placeholder="Confirm Passsword"
+              value={this.state.password_confirmation}
+              onChangeText={password_confirmation => this.setState({ password_confirmation })} 
+              autoCorrect={false}
+              autoCapitalize="none" />
+            <FancyButton onPress={() => this.props.signupUser(this.state)} >
+              Sign Up
+            </FancyButton>
+            <Button 
+              title="Back"
+              onPress={() => 
+                this.props.navigation.dispatch(NavigationActions.back())}
+              color="#ffffff"/>
+          </View>
+          <Footer />
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     )
   }
 }
@@ -80,16 +91,12 @@ const styles = StyleSheet.create({
     height: 40,
     width: 200,
     marginBottom: 10
-  },
-  formStyle: {
-    flex: 2,
-    marginTop: 35,
-    marginBottom: 20
   }
 });
 
 const mapStateToProps = state => ({
-  error: state.error
+  error: state.error,
+  isLoading: state.isLoading
 })
 const mapDispatchToProps = dispatch => ({
   signupUser: (userInputs) => {

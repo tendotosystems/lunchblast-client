@@ -25,12 +25,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     elevation: 2,
     padding: 20,
-    marginTop: 25
+    marginTop: 25,
+    width: 250
   },
   destinationTitleStyle: {
     ...fontStyles,
     fontSize: 20,
-    fontWeight: '400'
+    fontWeight: '400',
+    textAlign: 'center'
   },
   destinationDistanceStyle: {
     fontSize: 10,

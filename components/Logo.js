@@ -10,8 +10,8 @@ const Logo = () => (
 const styles = StyleSheet.create({
   imageStyle: {
     marginTop: 15,
-    height: 200,
-    width: 300,
+    height: 180,
+    width: 270,
     resizeMode: 'contain'
   }
 });

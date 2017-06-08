@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableWithoutFeedback, TextInput, Keyboard, Button } from 'react-native'
+import { 
+  View, StyleSheet, Button, 
+  TouchableWithoutFeedback, TextInput, 
+  Keyboard, ActivityIndicator, StatusBar
+} from 'react-native'
 import { connect } from 'react-redux'
 import { authorizeUser, clearError } from '../store/actions'
 import FancyButton from '../components/FancyButton'
@@ -15,15 +19,18 @@ class Login extends Component {
   };
   
   render() {
-    const { authorizeUser, error, clearError } = this.props
+    const { authorizeUser, error, clearError, isLoading } = this.props
     const { navigate } = this.props.navigation
     const { container, inputStyle, formStyle } = styles
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={container}>
+          <StatusBar
+            barStyle="light-content" />
           <Logo />
-          { error !== '' ? <ErrorMessage message={error} onClose={clearError} /> : null }
-          <View style={styles.formStyle}>
+          <ErrorMessage message={error} onClose={clearError} />
+          <ActivityIndicator animating={isLoading} style={styles.loadingStyle}/>
+          <View>
             <TextInput
               style={inputStyle}
               placeholder="Email"
@@ -41,10 +48,10 @@ class Login extends Component {
               autoCapitalize="none" />
             <FancyButton onPress={() => authorizeUser(this.state.email,
                                                       this.state.password)}>
-                Log Me In!
+                Log In
             </FancyButton>
             <Button
-               title="Sign Me Up"
+               title="Sign Up"
                onPress={() => navigate('Signup')}
                color="#ffffff" />
           </View>
@@ -58,6 +65,7 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: '#05224B',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -73,17 +81,17 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     height: 40,
     width: 200,
-    marginBottom: 15
+    marginBottom: 10
   },
-  formStyle: {
-    flex: 2,
-    marginTop: 45,
-    marginBottom: 30
+  loadingStyle: {
+    marginTop: 10,
+    marginBottom: 10
   }
 });
 
 const mapStateToProps = state => ({
-  error: state.error
+  error: state.error,
+  isLoading: state.isLoading
 })
 const mapDispatchToProps = dispatch => ({
   authorizeUser: (email, password) => dispatch(authorizeUser(email, password)),
