@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet, Text } from 'react-native';
+import { View, Image, StyleSheet, Text, Dimensions } from 'react-native';
 import Quote from './Quote'
 
 const Footer = ({quote}) => (
@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
   imageStyle: {
     resizeMode: 'repeat',
     height: 40,
+    width: Dimensions.get("window").width,
     marginTop: 10
   }
 });
