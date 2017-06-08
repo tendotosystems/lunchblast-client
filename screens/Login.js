@@ -16,20 +16,21 @@ class Login extends Component {
   render() {
     const { authorizeUser } = this.props
     const { navigate } = this.props.navigation
+    const { container, inputStyle, formStyle } = styles
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
+        <View style={container}>
           <Logo />
-          <View style={styles.formStyle}>
+          <View style={formStyle}>
             <TextInput
-              style={styles.inputStyle}
+              style={inputStyle}
               placeholder="Email"
               value={this.state.email}
               onChangeText={email => this.setState({ email })}
               autoCorrect={false}
               autoCapitalize="none" />
             <TextInput
-              style={styles.inputStyle}
+              style={inputStyle}
               secureTextEntry={true}
               placeholder="Password"
               value={this.state.password}
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
   },
   formStyle: {
     flex: 2,
-    marginTop: 30,
+    marginTop: 45,
     marginBottom: 30
   }
 });
