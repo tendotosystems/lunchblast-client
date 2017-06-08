@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Button, StyleSheet, TextInput, ActivityIndicator } from 'react-native'
+import { View, Text, Button, StyleSheet, TextInput, ActivityIndicator, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { authorizeUser, signupUser, clearError } from '../store/actions'
 import { NavigationActions } from 'react-navigation'
@@ -21,6 +21,8 @@ class Signup extends React.Component {
     const { container, formStyle, inputStyle } = styles
     return (
       <View style={styles.container}>
+        <StatusBar
+          barStyle="light-content" />
         <Logo />
         <ActivityIndicator animating={isLoading} />
         <ErrorMessage message={error} onClose={clearError} />

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-<<<<<<< HEAD
-import { View, StyleSheet, TouchableWithoutFeedback, TextInput, Keyboard, ActivityIndicator } from 'react-native'
-=======
-import { View, StyleSheet, TouchableWithoutFeedback, TextInput, Keyboard, Button } from 'react-native'
->>>>>>> master
+import { 
+  View, StyleSheet, Button, 
+  TouchableWithoutFeedback, TextInput, 
+  Keyboard, ActivityIndicator, StatusBar
+} from 'react-native'
 import { connect } from 'react-redux'
 import { authorizeUser, clearError } from '../store/actions'
 import FancyButton from '../components/FancyButton'
@@ -25,6 +25,8 @@ class Login extends Component {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={container}>
+          <StatusBar
+            barStyle="light-content" />
           <Logo />
           <ErrorMessage message={error} onClose={clearError} />
           <ActivityIndicator animating={isLoading} style={styles.loadingStyle}/>
