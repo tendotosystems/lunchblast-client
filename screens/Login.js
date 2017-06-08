@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet, TouchableWithoutFeedback, TextInput, Keyboard } from 'react-native'
 import { connect } from 'react-redux'
 import { authorizeUser } from '../store/actions'
-import Button from '../components/Button'
+import FancyButton from '../components/FancyButton'
 import Logo from '../components/Logo'
 import Footer from '../components/Footer'
 
@@ -36,13 +36,13 @@ class Login extends Component {
               onChangeText={password => this.setState({ password })} 
               autoCorrect={false}
               autoCapitalize="none" />
-            <Button onPress={() => authorizeUser(this.state.email,
-                                                 this.state.password)}>
+            <FancyButton onPress={() => authorizeUser(this.state.email,
+                                                      this.state.password)}>
                 Log Me In!
-            </Button>
-            <Button onPress={() => navigate('Signup')}>
+            </FancyButton>
+            <FancyButton onPress={() => navigate('Signup')}>
               Sign Me Up!
-            </Button>
+            </FancyButton>
           </View>
           <Footer />
         </View>
@@ -67,11 +67,11 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     height: 40,
     width: 200,
-    marginBottom: 25
+    marginBottom: 15
   },
   formStyle: {
     flex: 2,
-    marginTop: 45,
+    marginTop: 30,
     marginBottom: 30
   }
 });
