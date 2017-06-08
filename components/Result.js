@@ -11,6 +11,7 @@ const Result = ({ destination, onResultPress }) => (
       <Text style={styles.destinationDistanceStyle}>
         {destination.distance_to}
       </Text>
+      { destination.selected ? <Text>Selected</Text> : null }
   </TouchableOpacity>
 )
 
