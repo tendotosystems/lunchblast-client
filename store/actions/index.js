@@ -74,7 +74,7 @@ export const authorizeUser = (email, password) => {
       }
     } catch(e) {
       console.log("You could not be logged in.");
-      dispatch(setError("You could not be logged in."))
+      dispatch(setError("There was an error logging you in."))
     }
     dispatch(endFetch())
   }
@@ -95,7 +95,7 @@ export const signupUser = (userInputs) => {
       }
     } catch(e) {
       console.log('There was an error logging you in.  Please make sure your password and password confirmation match')
-      dispatch(setError('There was an error logging you in.  Please make sure your password and password confirmation match.'))
+      dispatch(setError('There was an error signing you up.'))
     }
     dispatch(endFetch())
   }

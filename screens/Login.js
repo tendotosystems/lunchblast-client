@@ -30,7 +30,7 @@ class Login extends Component {
           <Logo />
           <ErrorMessage message={error} onClose={clearError} />
           <ActivityIndicator animating={isLoading} style={styles.loadingStyle}/>
-          <View >
+          <View>
             <TextInput
               style={inputStyle}
               placeholder="Email"
@@ -48,10 +48,10 @@ class Login extends Component {
               autoCapitalize="none" />
             <FancyButton onPress={() => authorizeUser(this.state.email,
                                                       this.state.password)}>
-                Log Me In!
+                Log In
             </FancyButton>
             <Button
-               title="Sign Me Up"
+               title="Sign Up"
                onPress={() => navigate('Signup')}
                color="#ffffff" />
           </View>
@@ -81,10 +81,7 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     height: 40,
     width: 200,
-    marginBottom: 15
-  },
-  formStyle: {
-    flex: 2,
+    marginBottom: 10
   },
   loadingStyle: {
     marginTop: 10,
