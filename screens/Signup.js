@@ -29,33 +29,35 @@ class Signup extends React.Component {
         <View style={styles.container}>
           <StatusBar
             barStyle="light-content" />
-          <Logo />
-          <ErrorMessage message={error} onClose={clearError} />
-          <ActivityIndicator animating={isLoading} />
-          <KeyboardAvoidingView behavior="padding">
-            <TextInput
-              style={inputStyle}
-              placeholder="Email"
-              value={this.state.email}
-              onChangeText={email => this.setState({ email })}
-              autoCorrect={false}
-              autoCapitalize="none" />
-            <TextInput
-              style={inputStyle}
-              secureTextEntry={true}
-              placeholder="Password"
-              value={this.state.password}
-              onChangeText={password => this.setState({ password })} 
-              autoCorrect={false}
-              autoCapitalize="none" />
-            <TextInput
-              style={inputStyle}
-              secureTextEntry={true}
-              placeholder="Confirm Passsword"
-              value={this.state.password_confirmation}
-              onChangeText={password_confirmation => this.setState({ password_confirmation })} 
-              autoCorrect={false}
-              autoCapitalize="none" />
+          <KeyboardAvoidingView behavior="position" contentContainerStyle={styles.contentContainer}>
+            <Logo />
+            <ErrorMessage message={error} onClose={clearError} />
+            <ActivityIndicator animating={isLoading} />
+            <View style={{marginVertical: 10, width: '100%'}}>
+              <TextInput
+                style={inputStyle}
+                placeholder="Email"
+                value={this.state.email}
+                onChangeText={email => this.setState({ email })}
+                autoCorrect={false}
+                autoCapitalize="none" />
+              <TextInput
+                style={inputStyle}
+                secureTextEntry={true}
+                placeholder="Password"
+                value={this.state.password}
+                onChangeText={password => this.setState({ password })} 
+                autoCorrect={false}
+                autoCapitalize="none" />
+              <TextInput
+                style={inputStyle}
+                secureTextEntry={true}
+                placeholder="Confirm Passsword"
+                value={this.state.password_confirmation}
+                onChangeText={password_confirmation => this.setState({ password_confirmation })} 
+                autoCorrect={false}
+                autoCapitalize="none" />
+            </View>
             <FancyButton onPress={() => this.props.signupUser(this.state)} >
               Sign Up
             </FancyButton>
@@ -77,8 +79,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#05224B',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     paddingTop: 15
+  },
+  contentContainer: {
+    marginTop: 50,
+    height: 500,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start' 
   },
   inputStyle: {
     ...fontStyles,
@@ -89,7 +98,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 23,
     height: 40,
-    width: 200,
     marginBottom: 10
   }
 });
