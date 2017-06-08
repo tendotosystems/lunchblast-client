@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, TouchableWithoutFeedback, TextInput, Keyboard } from 'react-native'
 import { connect } from 'react-redux'
+<<<<<<< HEAD
 import { authorizeUser } from '../store/actions'
 import FancyButton from '../components/FancyButton'
+=======
+import { authorizeUser, clearError } from '../store/actions'
+import Button from '../components/Button'
+>>>>>>> origin
 import Logo from '../components/Logo'
 import Footer from '../components/Footer'
+import ErrorMessage from '../components/ErrorMessage'
 
 
 class Login extends Component {
@@ -14,14 +20,16 @@ class Login extends Component {
   };
   
   render() {
-    const { authorizeUser } = this.props
+    const { authorizeUser, error, clearError } = this.props
     const { navigate } = this.props.navigation
     const { container, inputStyle, formStyle } = styles
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={container}>
           <Logo />
-          <View style={formStyle}>
+
+          { error !== '' ? <ErrorMessage message={error} onClose={clearError} /> : null }
+          <View style={styles.formStyle}>
             <TextInput
               style={inputStyle}
               placeholder="Email"
@@ -77,9 +85,12 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+  error: state.error
+})
 const mapDispatchToProps = dispatch => ({
-  authorizeUser: (email, password) => dispatch(authorizeUser(email, password)) 
+  authorizeUser: (email, password) => dispatch(authorizeUser(email, password)),
+  clearError: () => dispatch(clearError()) 
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

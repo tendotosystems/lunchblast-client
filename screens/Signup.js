@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import { View, Text, Button, StyleSheet, TextInput } from 'react-native'
 import { connect } from 'react-redux'
-import { authorizeUser, signupUser } from '../store/actions'
+import { authorizeUser, signupUser, clearError } from '../store/actions'
 import { NavigationActions } from 'react-navigation'
+<<<<<<< HEAD
 import Logo from '../components/Logo'
 import Footer from '../components/Footer'
 import FancyButton from '../components/FancyButton'
+=======
+import ErrorMessage from '../components/ErrorMessage'
+>>>>>>> origin
 
 class Signup extends Component {
   state = {
@@ -15,13 +19,14 @@ class Signup extends Component {
   }
 
   render() {
-    const { signupUser } = this.props
+    const { signupUser, error, clearError } = this.props
     const { navigate } = this.props.navigation
     const { container, formStyle, inputStyle } = styles
     return (
-      <View style={container}>
-        <Logo />
-        <View style={formStyle}>
+
+      <View style={styles.container}>
+        { error !== '' ? <ErrorMessage message={error} onClose={clearError} /> : null }
+        <View style={styles.formStyle}>
           <TextInput
             style={inputStyle}
             placeholder="Email"
@@ -86,11 +91,14 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+  error: state.error
+})
 const mapDispatchToProps = dispatch => ({
   signupUser: (userInputs) => {
     dispatch(signupUser(userInputs))
-  }
+  },
+  clearError: () => { dispatch(clearError()) }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Signup)

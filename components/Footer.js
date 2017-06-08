@@ -4,7 +4,7 @@ import Quote from './Quote'
 
 const Footer = ({quote}) => (
   <View style={styles.viewStyle}>
-    <Quote quote={quote} />
+    { quote !== '' ? <Quote quote={quote} /> : null }
     <Image
       style={styles.imageStyle}
       source={require('../assets/icons/Checkerboard.png')}
@@ -20,10 +20,14 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     resizeMode: 'repeat',
-    height: 100,
+    height: 40,
     width: 400,
     marginTop: 10
   }
 });
+
+Footer.defaultProps = {
+  quote: ''
+}
 
 export default Footer;
