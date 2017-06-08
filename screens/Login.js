@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, TouchableWithoutFeedback, TextInput, Keyboard } from 'react-native'
 import { connect } from 'react-redux'
-import { authorizeUser } from '../store/actions'
+import { authorizeUser, clearError } from '../store/actions'
 import Button from '../components/Button'
 import Logo from '../components/Logo'
 import Footer from '../components/Footer'
+import ErrorMessage from '../components/ErrorMessage'
 
 
 class Login extends Component {
@@ -14,12 +15,13 @@ class Login extends Component {
   };
   
   render() {
-    const { authorizeUser, error } = this.props
+    const { authorizeUser, error, clearError } = this.props
     const { navigate } = this.props.navigation
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Logo />
+          { error !== '' ? <ErrorMessage message={error} onClose={clearError} /> : null }
           <View style={styles.formStyle}>
             <TextInput
               style={styles.inputStyle}
@@ -76,9 +78,12 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({
+  error: state.error
+})
 const mapDispatchToProps = dispatch => ({
-  authorizeUser: (email, password) => dispatch(authorizeUser(email, password)) 
+  authorizeUser: (email, password) => dispatch(authorizeUser(email, password)),
+  clearError: () => dispatch(clearError()) 
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
