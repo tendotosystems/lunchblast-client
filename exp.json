@@ -1,6 +1,6 @@
 {
   "name": "lunchblast-client",
-  "description": "An empty new project",
+  "description": "A quick way to decide where to eat lunch.",
   "slug": "lunchblast-client",
   "privacy": "public",
   "sdkVersion": "17.0.0",
