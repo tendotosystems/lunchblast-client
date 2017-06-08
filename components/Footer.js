@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
   imageStyle: {
     resizeMode: 'repeat',
     height: 40,
-    width: 400,
     marginTop: 10
   }
 });
