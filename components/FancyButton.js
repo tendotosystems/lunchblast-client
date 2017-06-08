@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#D91C5C',
     overflow: 'hidden',
-    marginBottom: 10
+    marginBottom: 10,
+    maxWidth: 250
   },
   textStyle: {
     ...fontStyles,

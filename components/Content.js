@@ -8,10 +8,8 @@ class Content extends React.Component {
   render() {
     const { onButtonPress, onResultPress, destination } = this.props
     return (
-      <View style={styles.contentContainerStyle}>
-        <FancyButton 
-          onPress={onButtonPress}
-          style={styles.buttonStyle}>
+      <View style={styles.contentContainer}>
+        <FancyButton onPress={onButtonPress}>
             Where should we eat?
         </FancyButton>
         { 
@@ -26,9 +24,10 @@ class Content extends React.Component {
 };
 
 const styles = StyleSheet.create({
-  contentContainerStyle: {
+  contentContainer: {
     marginTop: 10,
-    flex: 2
+    flexDirection: 'column',
+    alignItems: 'center'  
   }
 });
 
