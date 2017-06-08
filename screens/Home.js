@@ -15,17 +15,19 @@ class Home extends React.Component {
       <View style={styles.container}>
         <StatusBar
           barStyle="light-content" />
-        <Logo />
-        <ErrorMessage message={error} onClose={clearError} />
-        <ActivityIndicator animating={isLoading} style={styles.loadingIndicator} />
-        <Content 
-          onButtonPress={() => fetchDestination(token)}
-          onResultPress={() => console.log("Krog")}
-          destination={destination} />
-        <Button 
-          onPress={() => navigate('Settings')}
-          title="Settings"
-          color="#fff" />
+        <View style={styles.contentContainer}>
+          <Logo />
+          <ErrorMessage message={error} onClose={clearError} />
+          <ActivityIndicator animating={isLoading} style={styles.loadingIndicator} />
+          <Content 
+            onButtonPress={() => fetchDestination(token)}
+            onResultPress={() => console.log("Krog")}
+            destination={destination} />
+          <Button 
+            onPress={() => navigate('Settings')}
+            title="Settings"
+            color="#fff" />
+        </View>
         <Footer quote={quote} /> 
       </View>
     );
@@ -39,6 +41,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingTop: 15
+  },
+  contentContainer: {
+    marginTop: 50,
+    height: 500,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start' 
   },
   loadingIndicator: {
     marginTop: 10,

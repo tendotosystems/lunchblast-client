@@ -1,9 +1,12 @@
 import React from 'react'
-import { Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import fontStyles from '../styles/fonts';
 
 const Quote = ({quote}) => (
-  <Text style={styles.quoteStyle}>{quote}</Text>
+  <View>
+    <Text style={styles.quoteStyle}>{quote}</Text>
+    <Text style={styles.quoteStyle}> - Guy Fieri</Text>
+  </View>
 )
 
 const styles = StyleSheet.create({
@@ -12,7 +15,8 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
     paddingLeft: 5,
-    paddingRight: 5
+    paddingRight: 5,
+    textAlign: 'center'
   }
 })
 

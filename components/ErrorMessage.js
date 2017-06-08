@@ -18,11 +18,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#c0392b',
+    backgroundColor: 'rgba(192, 57, 43, 1.0)',
     borderRadius: 3,
-    marginTop: 5,
-    marginBottom: 5,
-    padding: 5
+    marginVertical: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 10
   },
   messageText: {
     fontFamily: 'avenir-next-regular',
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     padding: 2,
   },
   closeButtonText: {
+    marginLeft: 5,
     color: '#fff'
   }
 })
