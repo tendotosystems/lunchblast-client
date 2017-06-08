@@ -2,7 +2,7 @@ import React from 'react'
 import { 
   View, Text, Button, TouchableWithoutFeedback,
   StyleSheet, TextInput, Keyboard,
-  ActivityIndicator, StatusBar 
+  ActivityIndicator, StatusBar, KeyboardAvoidingView 
 } from 'react-native'
 import { connect } from 'react-redux'
 import { authorizeUser, signupUser, clearError } from '../store/actions'
@@ -23,7 +23,7 @@ class Signup extends React.Component {
   render() {
     const { signupUser, error, clearError, isLoading } = this.props
     const { navigate } = this.props.navigation
-    const { container, formStyle, inputStyle } = styles
+    const { container, inputStyle } = styles
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
         <View style={styles.container}>
@@ -32,7 +32,7 @@ class Signup extends React.Component {
           <Logo />
           <ErrorMessage message={error} onClose={clearError} />
           <ActivityIndicator animating={isLoading} />
-          <View>
+          <KeyboardAvoidingView behavior="padding">
             <TextInput
               style={inputStyle}
               placeholder="Email"
@@ -64,7 +64,7 @@ class Signup extends React.Component {
               onPress={() => 
                 this.props.navigation.dispatch(NavigationActions.back())}
               color="#ffffff"/>
-          </View>
+          </KeyboardAvoidingView>
           <Footer />
         </View>
       </TouchableWithoutFeedback>
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#05224B',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     paddingTop: 15
   },
   inputStyle: {
