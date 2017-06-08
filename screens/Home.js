@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, ActivityIndicator, StatusBar, Button } from 'react-native';
-import { authorizeUser, fetchDestination, clearError } from '../store/actions'
+import { authorizeUser, fetchDestination, clearError, makeSelection } from '../store/actions'
 import Logo from '../components/Logo'
 import ErrorMessage from '../components/ErrorMessage'
 import Footer from '../components/Footer'
@@ -9,7 +9,11 @@ import Content from '../components/Content'
 
 class Home extends React.Component {  
   render() {
-    const { token, fetchDestination, isLoading, quote, destination, error, clearError } = this.props
+    const { 
+      token, fetchDestination, isLoading, 
+      quote, destination, error, clearError,
+      makeSelection, user 
+    } = this.props
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
@@ -21,7 +25,7 @@ class Home extends React.Component {
           <ActivityIndicator animating={isLoading} style={styles.loadingIndicator} />
           <Content 
             onButtonPress={() => fetchDestination(token)}
-            onResultPress={() => console.log("Krog")}
+            onResultPress={() => makeSelection(user, token, destination)}
             destination={destination} />
           <Button 
             onPress={() => navigate('Settings')}
@@ -60,6 +64,7 @@ const mapStateToProps = (state) => {
   return {
     token: state.auth.token,
     isLoading: state.isLoading,
+    user: state.user,
     quote: state.quote,
     destination: state.destination,
     error: state.error
@@ -69,7 +74,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchDestination: (token) => dispatch(fetchDestination(token)),
-    clearError: () => dispatch(clearError())
+    clearError: () => dispatch(clearError()),
+    makeSelection: (user, token, destination) => dispatch(makeSelection(user, token, destination))
   }
 }
 

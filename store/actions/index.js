@@ -3,7 +3,8 @@ import {
   requestAuthorizeUser,
   requestSignupUser, 
   requestQuote, 
-  requestDestination 
+  requestDestination,
+  requestSelection 
 } from '../../utils/api'
 
 export const beginFetch = () => {
@@ -39,6 +40,13 @@ export const logout = () => ({ type: constants.LOGOUT })
 export const setDestination = (destination) => {
   return {
     type: constants.SET_DESTINATION,
+    payload: destination
+  }
+}
+
+export const selectDestination = (destination) => {
+  return {
+    type: constants.SELECT_DESTINATION,
     payload: destination
   }
 }
@@ -118,6 +126,25 @@ export const fetchDestination = (token) => {
       }
     } catch(error) {
       console.log("Couldn't make it to Flavortown.")
+      dispatch(setError("Couldn't make it to Flavortown."))
+    }
+    dispatch(endFetch())
+  }
+}
+
+export const makeSelection = (user, token, destination) => {
+  return async (dispatch) => {
+    dispatch(beginFetch())
+    try {
+      let response = await requestSelection(user, token, destination)
+      let responseJson = await response.json()
+
+      if(!response.ok) {
+        throw new Error()
+      } else {
+        dispatch(selectDestination(destination))
+      }
+    } catch(e) {
       dispatch(setError("Couldn't make it to Flavortown."))
     }
     dispatch(endFetch())
