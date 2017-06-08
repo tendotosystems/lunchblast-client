@@ -1,11 +1,13 @@
 import React from 'react'
-import { View, Text, Button, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 const ErrorMessage = ({message, onClose}) => (
   message !== '' ? (
     <View style={styles.container}>
-      <Text>{message}</Text>
-      <Button title="X" onPress={onClose} />
+      <Text style={styles.messageText}>{message}</Text>
+      <TouchableOpacity onPress={onClose} style={styles.closeButton}>
+        <Text style={styles.closeButtonText}>X</Text>
+      </TouchableOpacity>
     </View>
   ) :
   null
@@ -13,10 +15,24 @@ const ErrorMessage = ({message, onClose}) => (
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#c0392b',
+    borderRadius: 3,
+    marginBottom: 5,
+    padding: 5
+  },
+  messageText: {
+    fontFamily: 'avenir-next-regular',
+    color: '#fff',
+    padding: 0
+  },
+  closeButton: {
+    padding: 2,
+  },
+  closeButtonText: {
+    color: '#fff'
   }
 })
 

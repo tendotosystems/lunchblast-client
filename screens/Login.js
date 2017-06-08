@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableWithoutFeedback, TextInput, Keyboard } from 'react-native'
+import { View, StyleSheet, TouchableWithoutFeedback, TextInput, Keyboard, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import { authorizeUser, clearError } from '../store/actions'
 import Button from '../components/Button'
@@ -15,14 +15,15 @@ class Login extends Component {
   };
   
   render() {
-    const { authorizeUser, error, clearError } = this.props
+    const { authorizeUser, error, clearError, isLoading } = this.props
     const { navigate } = this.props.navigation
     return (
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={{flex: 1}}>
         <View style={styles.container}>
           <Logo />
           <ErrorMessage message={error} onClose={clearError} />
-          <View style={styles.formStyle}>
+          <ActivityIndicator animating={isLoading} style={styles.loadingStyle}/>
+          <View >
             <TextInput
               style={styles.inputStyle}
               placeholder="Email"
@@ -56,9 +57,10 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: '#05224B',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     paddingTop: 15
   },
   inputStyle: {
@@ -69,17 +71,20 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     height: 40,
     width: 200,
-    marginBottom: 25
+    marginBottom: 5
   },
   formStyle: {
     flex: 2,
-    marginTop: 45,
-    marginBottom: 30
+  },
+  loadingStyle: {
+    marginTop: 10,
+    marginBottom: 10
   }
 });
 
 const mapStateToProps = state => ({
-  error: state.error
+  error: state.error,
+  isLoading: state.isLoading
 })
 const mapDispatchToProps = dispatch => ({
   authorizeUser: (email, password) => dispatch(authorizeUser(email, password)),

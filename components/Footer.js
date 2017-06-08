@@ -3,7 +3,7 @@ import { View, Image, StyleSheet, Text } from 'react-native';
 import Quote from './Quote'
 
 const Footer = ({quote}) => (
-  <View style={styles.viewStyle}>
+  <View>
     { quote !== '' ? <Quote quote={quote} /> : null }
     <Image
       style={styles.imageStyle}
@@ -13,11 +13,6 @@ const Footer = ({quote}) => (
 )
 
 const styles = StyleSheet.create({
-  viewStyle: {
-    flex: 1,
-    alignItems: 'center',
-    marginTop: 5
-  },
   imageStyle: {
     resizeMode: 'repeat',
     height: 40,

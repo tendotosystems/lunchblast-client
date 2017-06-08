@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Button, StyleSheet, TextInput } from 'react-native'
+import { View, Text, Button, StyleSheet, TextInput, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import { authorizeUser, signupUser, clearError } from '../store/actions'
 import { NavigationActions } from 'react-navigation'
@@ -13,11 +13,12 @@ class Signup extends React.Component {
   }
 
   render() {
-    const { signupUser, error, clearError } = this.props
+    const { signupUser, error, clearError, isLoading } = this.props
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <Text style={styles.signupText}>Signup Screen</Text>
+        <ActivityIndicator animating={isLoading} />
         <ErrorMessage message={error} onClose={clearError} />
         <View style={styles.formStyle}>
           <TextInput
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#05224B',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     paddingTop: 15
   },
   signupText: {
@@ -83,7 +84,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  error: state.error
+  error: state.error,
+  isLoading: state.isLoading
 })
 const mapDispatchToProps = dispatch => ({
   signupUser: (userInputs) => {
