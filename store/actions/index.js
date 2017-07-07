@@ -4,8 +4,10 @@ import {
   requestSignupUser, 
   requestQuote, 
   requestDestination,
-  requestSelection 
+  requestSelection,
+  requestPushRegistration 
 } from '../../utils/api'
+import { Permissions, Notifications } from 'expo';
 
 export const beginFetch = () => {
   return {
@@ -65,6 +67,13 @@ export const setError = (error) => {
   }
 }
 
+export const receivedNotification = (notification) => {
+  return {
+    type: constants.RECEIVED_NOTIFICATION,
+    payload: notification
+  }
+}
+
 export const clearError = () => ({ type: constants.CLEAR_ERROR })
 
 export const authorizeUser = (email, password) => {
@@ -79,6 +88,7 @@ export const authorizeUser = (email, password) => {
         dispatch(setToken(responseJson.jwt))
         dispatch(setUser(responseJson.user))
         dispatch(login())
+        dispatch(registerForPushNotifications(responseJson.user))
       }
     } catch(e) {
       console.log("You could not be logged in.");
@@ -100,6 +110,7 @@ export const signupUser = (userInputs) => {
         dispatch(setToken(responseJson.jwt))
         dispatch(setUser(responseJson.user))
         dispatch(login())
+        dispatch(registerForPushNotifications(responseJson.user))
       }
     } catch(e) {
       console.log('There was an error logging you in.  Please make sure your password and password confirmation match')
@@ -150,3 +161,44 @@ export const makeSelection = (user, token, destination) => {
     dispatch(endFetch())
   }
 } 
+
+export const registerForPushNotifications = (user) => {
+  return async (dispatch) => {
+    dispatch(beginFetch())
+    try {
+      const { existingStatus } = await Permissions.getAsync(Permissions.REMOTE_NOTIFICATIONS);
+      let finalStatus = existingStatus;
+      // only ask if permissions have not already been determined, because
+      // iOS won't necessarily prompt the user a second time.
+      if (existingStatus !== 'granted') {
+        // Android remote notification permissions are granted during the app
+        // install, so this will only ask on iOS
+        const { status } = await Permissions.askAsync(Permissions.REMOTE_NOTIFICATIONS);
+        finalStatus = status;
+      }
+      // Stop here if the user did not grant permissions
+      if (finalStatus !== 'granted') {
+        return;
+      }
+      // Get the token that uniquely identifies this device
+      let pushToken = await Notifications.getExponentPushTokenAsync()
+      
+      // POST the token to our backend so we can use it to send pushes from there
+      let response = await requestPushRegistration(user, pushToken)
+      
+      if (!response.ok) {
+        throw new Error()
+      } else {
+        console.log(pushToken)
+        Notifications.addListener((notification) => {
+          console.log('inside listener')
+          console.log(notification.message)
+        dispatch(receivedNotification(notification.data))
+      }).bind(this)
+      }
+    } catch(e) {
+      dispatch(setError("You were not successfully registered for notifications."))
+    }
+    dispatch(endFetch())
+  }
+}

@@ -4,6 +4,7 @@ import { user } from './user'
 import { auth } from './auth'
 import { destination } from './destination'
 import { quote } from './quote'
+import { notification } from './notification'
 import { error } from './error'
 
 const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   auth,
   destination,
   quote,
-  error
+  error,
+  notification
 })
 
 export default rootReducer

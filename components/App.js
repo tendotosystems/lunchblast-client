@@ -5,12 +5,14 @@ import { authorizeUser } from '../store/actions'
 import MainNavigator from '../navigators/MainNavigator'
 import AuthNavigator from '../navigators/AuthNavigator'
 
+
 const App = ({auth}) => auth.isLoggedIn ? <MainNavigator /> : <AuthNavigator />
 
 const mapStateToProps = (state) => {
   console.log(state)
   return {
     auth: state.auth,
+    notification: state.notification
   }
 }
 

@@ -5,6 +5,7 @@ let userSignupUrl = `${baseUrl}/user`
 let destinationUrl = `${baseUrl}/destination`
 let quoteUrl = 'https://4ozc0qiiec.execute-api.us-east-1.amazonaws.com/prod/quote'
 let selectionUrl = `${baseUrl}/selection`
+let pushUrl = `${baseUrl}/tokens`
 
 export const requestAuthorizeUser = (email, password) => {
   let init = {
@@ -72,4 +73,19 @@ export const requestQuote = () => {
   }
 
   return fetch(quoteUrl, init)
+}
+
+export const requestPushRegistration = (user, pushToken) => {
+  let init = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      push_token: pushToken,
+      user_id: user.id
+    })
+  }
+  
+  return fetch(pushUrl, init)
 }
