@@ -6,13 +6,14 @@ import Logo from '../components/Logo'
 import ErrorMessage from '../components/ErrorMessage'
 import Footer from '../components/Footer'
 import Content from '../components/Content'
+import Notification from '../components/Notification'
 
 class Home extends React.Component {  
   render() {
     const { 
       token, fetchDestination, isLoading, 
       quote, destination, error, clearError,
-      makeSelection, user 
+      makeSelection, user, notification 
     } = this.props
     const { navigate } = this.props.navigation
     return (
@@ -20,6 +21,9 @@ class Home extends React.Component {
         <StatusBar
           barStyle="light-content" />
         <View style={styles.contentContainer}>
+          <Notification>
+            {notification}
+          </Notification>
           <Logo />
           <ErrorMessage message={error} onClose={clearError} />
           <ActivityIndicator animating={isLoading} style={styles.loadingIndicator} />
@@ -67,7 +71,8 @@ const mapStateToProps = (state) => {
     user: state.user,
     quote: state.quote,
     destination: state.destination,
-    error: state.error
+    error: state.error,
+    notification: state.notification.a
   }
 }
 
