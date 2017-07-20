@@ -76,6 +76,8 @@ export const receivedNotification = (notification) => {
 
 export const clearError = () => ({ type: constants.CLEAR_ERROR })
 
+export const clearNotification = () => ({ type: constants.CLEAR_NOTIFICATION })
+
 export const authorizeUser = (email, password) => {
   return async (dispatch) => {
     dispatch(beginFetch())

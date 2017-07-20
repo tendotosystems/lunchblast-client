@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, ActivityIndicator, StatusBar, Button } from 'react-native';
-import { authorizeUser, fetchDestination, clearError, makeSelection } from '../store/actions'
+import { authorizeUser,
+         fetchDestination,
+         clearError,
+         makeSelection, 
+         clearNotification } from '../store/actions'
 import Logo from '../components/Logo'
 import ErrorMessage from '../components/ErrorMessage'
 import Footer from '../components/Footer'
@@ -13,7 +17,7 @@ class Home extends React.Component {
     const { 
       token, fetchDestination, isLoading, 
       quote, destination, error, clearError,
-      makeSelection, user, notification 
+      makeSelection, user, notification, clearNotification 
     } = this.props
     const { navigate } = this.props.navigation
     return (
@@ -21,9 +25,7 @@ class Home extends React.Component {
         <StatusBar
           barStyle="light-content" />
         <View style={styles.contentContainer}>
-          <Notification>
-            {notification}
-          </Notification>
+          <Notification message={notification} onClose={clearNotification} />
           <Logo />
           <ErrorMessage message={error} onClose={clearError} />
           <ActivityIndicator animating={isLoading} style={styles.loadingIndicator} />
@@ -80,7 +82,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchDestination: (token) => dispatch(fetchDestination(token)),
     clearError: () => dispatch(clearError()),
-    makeSelection: (user, token, destination) => dispatch(makeSelection(user, token, destination))
+    makeSelection: (user, token, destination) => dispatch(makeSelection(user, token, destination)),
+    clearNotification: () => dispatch(clearNotification())
   }
 }
 
