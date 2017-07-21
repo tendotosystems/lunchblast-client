@@ -188,18 +188,13 @@ export const registerForPushNotifications = (user) => {
       // POST the token to our backend so we can use it to send pushes from there
       let response = await requestPushRegistration(user, pushToken)
       
-      if (!response.ok) {
-        throw new Error()
-      } else {
-        console.log(pushToken)
-        Notifications.addListener((notification) => {
-          console.log('inside listener')
-          console.log(notification.message)
-        dispatch(receivedNotification(notification.data))
-      }).bind(this)
-      }
+      // if (!response.ok) {
+      //   throw new Error()
+      // } else {
+      //   console.log(pushToken)
+      // }
     } catch(e) {
-      dispatch(setError("You were not successfully registered for notifications."))
+      // dispatch(setError("You were not successfully registered for notifications."))
     }
     dispatch(endFetch())
   }

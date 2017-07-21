@@ -5,14 +5,22 @@ import { authorizeUser,
          fetchDestination,
          clearError,
          makeSelection, 
-         clearNotification } from '../store/actions'
+         clearNotification,
+         receivedNotification } from '../store/actions'
 import Logo from '../components/Logo'
 import ErrorMessage from '../components/ErrorMessage'
 import Footer from '../components/Footer'
 import Content from '../components/Content'
 import Notification from '../components/Notification'
+import { Notifications } from 'expo';
 
 class Home extends React.Component {  
+  componentWillMount() {
+    this._notificationSubscription = Notifications.addListener((notification) => {
+        console.log('inside listener')
+      this.props.receivedNotification(notification.data)
+    })
+  }
   render() {
     const { 
       token, fetchDestination, isLoading, 
@@ -83,7 +91,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchDestination: (token) => dispatch(fetchDestination(token)),
     clearError: () => dispatch(clearError()),
     makeSelection: (user, token, destination) => dispatch(makeSelection(user, token, destination)),
-    clearNotification: () => dispatch(clearNotification())
+    clearNotification: () => dispatch(clearNotification()),
+    receivedNotification: (notification) => dispatch(receivedNotification(notification))
   }
 }
 
@@ -91,3 +100,9 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Home);
+
+// exponent.publish(
+//       exponentPushToken: "ExponentPushToken[AqTud-OhFGwBfmAzroqPhK]",
+//       message: "hi",
+//       data: {a: "hello"}, 
+//     )
